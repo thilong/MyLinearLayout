@@ -452,14 +452,14 @@ static NSInteger sBaseTag = 100000;
         
         //根据上面布局模型对高度和宽度的定义指定条目布局的尺寸。如果小于等于1则用相对尺寸，否则用绝对尺寸。
         if (layoutTemplate.width <= 1)
-            itemLayout.widthSize.equalTo(itemContainerLayout.widthSize).multiply(layoutTemplate.width);
+            [[itemLayout.widthSize myEqualTo:(itemContainerLayout.widthSize)] myMultiply:(layoutTemplate.width)];
         else
-            itemLayout.widthSize.equalTo(@(layoutTemplate.width));
+            [itemLayout.widthSize myEqualTo:(@(layoutTemplate.width))];
         
         if (layoutTemplate.height <= 1)
-            itemLayout.heightSize.equalTo(itemContainerLayout.heightSize).multiply(layoutTemplate.height);
+           [[ itemLayout.heightSize myEqualTo:(itemContainerLayout.heightSize)] myMultiply:(layoutTemplate.height)];
         else
-            itemLayout.heightSize.equalTo(@(layoutTemplate.height));
+            [itemLayout.heightSize myEqualTo:(@(layoutTemplate.height))];
         
         [itemContainerLayout addSubview:itemLayout];
     }
@@ -499,7 +499,7 @@ static NSInteger sBaseTag = 100000;
     //向上浮动，高度占用剩余的高度，宽度和父布局保持一致。
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:dataModel.image]];
     imageView.weight = 1;
-    imageView.widthSize.equalTo(itemLayout.widthSize);
+    [imageView.widthSize myEqualTo:(itemLayout.widthSize)];
     [itemLayout addSubview:imageView];
     
     return itemLayout;
@@ -548,7 +548,7 @@ static NSInteger sBaseTag = 100000;
 
     //因为图片要占据全高，所以必须优先向右浮动。
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:dataModel.image]];
-    imageView.heightSize.equalTo(itemLayout.heightSize);
+    [imageView.heightSize myEqualTo:(itemLayout.heightSize)];
     imageView.reverseFloat = YES;
     [itemLayout addSubview:imageView];
     
@@ -645,7 +645,7 @@ static NSInteger sBaseTag = 100000;
     
     //向上浮动，并占用剩余的空间高度。
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:dataModel.image]];
-    imageView.widthSize.equalTo(itemLayout.widthSize);
+    [imageView.widthSize myEqualTo:(itemLayout.widthSize)];
     imageView.weight = 1;
     [itemLayout addSubview:imageView];
     
@@ -663,7 +663,7 @@ static NSInteger sBaseTag = 100000;
     titleLabel.font = [UIFont boldSystemFontOfSize:15];
     titleLabel.myLeading = 5;
     titleLabel.myTop = 5;
-    titleLabel.widthSize.equalTo(itemLayout.widthSize).multiply(0.5).add(-2.5);
+    [[[titleLabel.widthSize myEqualTo:(itemLayout.widthSize)] myMultiply:(0.5)] myAdd:(-2.5)];
     [titleLabel sizeToFit];
     [itemLayout addSubview:titleLabel];
     
@@ -674,7 +674,7 @@ static NSInteger sBaseTag = 100000;
     subTitleLabel.myLeading = 5;
     subTitleLabel.myTop = 5;
     [subTitleLabel sizeToFit];
-    subTitleLabel.widthSize.equalTo(itemLayout.widthSize).multiply(0.5).add(-2.5);
+    [[[subTitleLabel.widthSize myEqualTo:(itemLayout.widthSize)] myMultiply:(0.5)] myAdd:(-2.5)];
     [itemLayout addSubview:subTitleLabel];
     
     //价格向下浮动
@@ -686,7 +686,7 @@ static NSInteger sBaseTag = 100000;
     priceLabel.myBottom = 5;
     [priceLabel sizeToFit];
     priceLabel.reverseFloat = YES;
-    priceLabel.widthSize.equalTo(itemLayout.widthSize).multiply(0.5).add(-2.5);
+    [[[priceLabel.widthSize myEqualTo:(itemLayout.widthSize)] myMultiply:(0.5)] myAdd:(-2.5)];
     [itemLayout addSubview:priceLabel];
     
     //描述向下浮动
@@ -697,13 +697,13 @@ static NSInteger sBaseTag = 100000;
     descLabel.myLeading = 5;
     [descLabel sizeToFit];
     descLabel.reverseFloat = YES;
-    descLabel.widthSize.equalTo(itemLayout.widthSize).multiply(0.5).add(-2.5);
+    [[[descLabel.widthSize myEqualTo:(itemLayout.widthSize)] myMultiply:(0.5)] myAdd:(-2.5)];
     [itemLayout addSubview:descLabel];
     
     //向上浮动，因为宽度无法再容纳，所以这里会换列继续向上浮动。
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:dataModel.image]];
-    imageView.widthSize.equalTo(itemLayout.widthSize).multiply(0.5).add(-2.5);
-    imageView.heightSize.equalTo(itemLayout.heightSize);
+    [[[imageView.widthSize myEqualTo:(itemLayout.widthSize)] myMultiply:(0.5)] myAdd:(-2.5)];
+    [imageView.heightSize myEqualTo:(itemLayout.heightSize)];
     [itemLayout addSubview:imageView];
     
     
@@ -722,7 +722,7 @@ static NSInteger sBaseTag = 100000;
     titleLabel.font = [UIFont boldSystemFontOfSize:15];
     titleLabel.myLeading = 5;
     titleLabel.myTop = 5;
-    titleLabel.widthSize.equalTo(itemLayout.widthSize).multiply(0.5).add(-2.5);
+    [[[titleLabel.widthSize myEqualTo:(itemLayout.widthSize)] myMultiply:(0.5)] myAdd:(-2.5)];
     [titleLabel sizeToFit];
     [itemLayout addSubview:titleLabel];
     
@@ -733,13 +733,13 @@ static NSInteger sBaseTag = 100000;
     subTitleLabel.myLeading = 5;
     subTitleLabel.myTop = 5;
     [subTitleLabel sizeToFit];
-    subTitleLabel.widthSize.equalTo(itemLayout.widthSize).multiply(0.5).add(-2.5);
+    [[[subTitleLabel.widthSize myEqualTo:(itemLayout.widthSize)] myMultiply:(0.5)] myAdd:(-2.5)];
     [itemLayout addSubview:subTitleLabel];
     
     //继续向上浮动，这里因为高度和父布局高度一致，因此会换列浮动。
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:dataModel.image]];
-    imageView.widthSize.equalTo(itemLayout.widthSize).multiply(0.5).add(-2.5);
-    imageView.heightSize.equalTo(itemLayout.heightSize);
+    [[[imageView.widthSize myEqualTo:(itemLayout.widthSize)] myMultiply:(0.5)] myAdd:(-2.5)];
+    [imageView.heightSize myEqualTo:(itemLayout.heightSize)];
     [itemLayout addSubview:imageView];
     
     return itemLayout;
@@ -770,7 +770,7 @@ static NSInteger sBaseTag = 100000;
     
     //继续向上浮动，占据剩余高度。
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:dataModel.image]];
-    imageView.widthSize.equalTo(itemLayout.widthSize);
+    [imageView.widthSize myEqualTo:(itemLayout.widthSize)];
     imageView.weight = 1;
     [itemLayout addSubview:imageView];
     
@@ -800,7 +800,7 @@ static NSInteger sBaseTag = 100000;
     [itemLayout addSubview:subTitleLabel];
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:dataModel.image]];
-    imageView.widthSize.equalTo(itemLayout.widthSize);
+    [imageView.widthSize myEqualTo:(itemLayout.widthSize)];
     imageView.weight = 1;   //图片占用剩余的全部高度
     [itemLayout addSubview:imageView];
     

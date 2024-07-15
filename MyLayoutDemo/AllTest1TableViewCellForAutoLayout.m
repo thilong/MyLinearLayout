@@ -107,8 +107,8 @@
     _rootLayout.paddingBottom = 5;
     //这个属性只局限于在UITableViewCell中使用，用来优化tableviewcell的高度自适应的性能，其他地方请不要使用！！！
     _rootLayout.cacheEstimatedRect = YES;
-    _rootLayout.heightSize.equalTo(@(MyLayoutSize.wrap));
-    _rootLayout.widthSize.equalTo(nil);
+    [_rootLayout.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
+    [_rootLayout.widthSize myEqualTo:(nil)];
     [self.contentView addSubview:_rootLayout];
     
     
@@ -157,7 +157,7 @@
     _rootLayout.paddingBottom = 5;
     //这个属性只局限于在UITableViewCell中使用，用来优化tableviewcell的高度自适应的性能，其他地方请不要使用！！！
     _rootLayout.cacheEstimatedRect = YES;
-    _rootLayout.heightSize.equalTo(@(MyLayoutSize.wrap));
+    [_rootLayout.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     [self.contentView addSubview:_rootLayout];
     
   
@@ -172,23 +172,23 @@
     _nickNameLabel = [UILabel new];
     _nickNameLabel.textColor = [CFTool color:3];
     _nickNameLabel.font = [CFTool font:17];
-    _nickNameLabel.leadingPos.equalTo(_headImageView.trailingPos).offset(5);  //昵称文本的左边在头像视图的右边并偏移5个点。
+    [[_nickNameLabel.leadingPos myEqualTo:(_headImageView.trailingPos)] myOffset:(5)];  //昵称文本的左边在头像视图的右边并偏移5个点。
     [_rootLayout addSubview:_nickNameLabel];
     
     
     _textMessageLabel = [UILabel new];
     _textMessageLabel.font = [CFTool font:15];
     _textMessageLabel.textColor = [CFTool color:4];
-    _textMessageLabel.leadingPos.equalTo(_headImageView.trailingPos).offset(5); //文本消息的左边在头像视图的右边并偏移5个点。
-    _textMessageLabel.trailingPos.equalTo(_rootLayout.trailingPos);    //文本消息的右边和父布局的右边对齐。上面2行代码也同时确定了文本消息的宽度。
-    _textMessageLabel.topPos.equalTo(_nickNameLabel.bottomPos).offset(5); //文本消息的顶部在昵称文本的底部并偏移5个点。
-    _textMessageLabel.heightSize.equalTo(@(MyLayoutSize.wrap)); //如果想让文本消息的高度是动态的，请在设置明确宽度的情况下将高度设置为自适应
+    [[_textMessageLabel.leadingPos myEqualTo:(_headImageView.trailingPos)] myOffset:(5)]; //文本消息的左边在头像视图的右边并偏移5个点。
+    [_textMessageLabel.trailingPos myEqualTo:(_rootLayout.trailingPos)];    //文本消息的右边和父布局的右边对齐。上面2行代码也同时确定了文本消息的宽度。
+    [[_textMessageLabel.topPos myEqualTo:(_nickNameLabel.bottomPos)] myOffset:(5)]; //文本消息的顶部在昵称文本的底部并偏移5个点。
+    [_textMessageLabel.heightSize myEqualTo:(@(MyLayoutSize.wrap))]; //如果想让文本消息的高度是动态的，请在设置明确宽度的情况下将高度设置为自适应
     [_rootLayout addSubview:_textMessageLabel];
     
     
     _imageMessageImageView = [UIImageView new];
-    _imageMessageImageView.centerXPos.equalTo(@5);  //图片消息的水平中心点等于父布局的水平中心点并偏移5个点的位置,这里要偏移5的原因是头像和消息之间需要5个点的间距。
-    _imageMessageImageView.topPos.equalTo(_textMessageLabel.bottomPos).offset(5); //图片消息的顶部在文本消息的底部并偏移5个点。
+    [_imageMessageImageView.centerXPos myEqualTo:(@5)];  //图片消息的水平中心点等于父布局的水平中心点并偏移5个点的位置,这里要偏移5的原因是头像和消息之间需要5个点的间距。
+    [[_imageMessageImageView.topPos myEqualTo:(_textMessageLabel.bottomPos)] myOffset:(5)]; //图片消息的顶部在文本消息的底部并偏移5个点。
     [_rootLayout addSubview:_imageMessageImageView];
 
 }
@@ -201,7 +201,7 @@
     _rootLayout.paddingBottom = 5;
     //这个属性只局限于在UITableViewCell中使用，用来优化tableviewcell的高度自适应的性能，其他地方请不要使用！！！
     _rootLayout.cacheEstimatedRect = YES;
-    _rootLayout.heightSize.equalTo(@(MyLayoutSize.wrap));
+    [_rootLayout.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     [self.contentView addSubview:_rootLayout];
 
     /*

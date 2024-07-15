@@ -204,7 +204,7 @@
             imageView.contentMode = UIViewContentModeScaleAspectFill;
             imageView.clipsToBounds = YES;
             imageView.backgroundColor = [UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1];
-            imageView.heightSize.equalTo(imageView.widthSize);
+            [imageView.heightSize myEqualTo:(imageView.widthSize)];
             [imageViewArray addObject:imageView];
         }
         _nineImageViews = [imageViewArray copy];

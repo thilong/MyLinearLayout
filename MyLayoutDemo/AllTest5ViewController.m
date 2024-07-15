@@ -65,7 +65,7 @@
     //但是调用lsc.backgroundColor = xx 则会崩溃，因为fetchLayoutSizeClass返回的并不是真的视图对象。
     MyLinearLayout *lsc = [rootLayout fetchLayoutSizeClass:MySizeClass_wAny | MySizeClass_hCompact copyFrom:MySizeClass_wAny | MySizeClass_hAny];
     lsc.orientation = MyOrientation_Horz;
-    lsc.widthSize.equalTo(nil);
+    [lsc.widthSize myEqualTo:(nil)];
     lsc.gravity = MyGravity_Vert_Fill;
     
     

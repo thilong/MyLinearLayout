@@ -46,104 +46,71 @@
     return self;
 }
 
-- (MyLayoutSize * (^)(id val))myEqualTo {
-    return ^id(id val) {
-        [self _myEqualTo:val];
+- (MyLayoutSize *)myEqualTo:(id)value {
+    
+        [self _myEqualTo:value];
         //如果尺寸是自适应，并且当前视图是布局视图则直接布局视图自身刷新布局，否则由视图的父视图来刷新布局，这里特殊处理。
-        if ([val isKindOfClass:[NSNumber class]]) {
-            if ([val integerValue] == MyLayoutSize.wrap && [self.view isKindOfClass:[MyBaseLayout class]]) {
+        if ([value isKindOfClass:[NSNumber class]]) {
+            if ([value integerValue] == MyLayoutSize.wrap && [self.view isKindOfClass:[MyBaseLayout class]]) {
                 [self.view setNeedsLayout];
                 return self;
             }
         }
         [self setNeedsLayout];
         return self;
-    };
+    
 }
 
-- (MyLayoutSize * (^)(CGFloat val))myAdd {
-    return ^id(CGFloat val) {
-        [self _myAdd:val];
+- (MyLayoutSize *)myAdd:(CGFloat)value {
+    
+        [self _myAdd:value];
         [self setNeedsLayout];
         return self;
-    };
 }
 
-- (MyLayoutSize * (^)(CGFloat val))myMultiply {
-    return ^id(CGFloat val) {
-        [self _myMultiply:val];
+- (MyLayoutSize *)myMultiply:(CGFloat)value {
+    
+        [self _myMultiply:value];
         [self setNeedsLayout];
         return self;
-    };
+    
 }
 
-- (MyLayoutSize * (^)(CGFloat val))myMin {
-    return ^id(CGFloat val) {
-        [self _myMin:val];
+- (MyLayoutSize *)myMin:(CGFloat)value {
+    
+        [self _myMin:value];
         [self setNeedsLayout];
         return self;
-    };
+    
 }
 
-- (MyLayoutSize * (^)(id sizeVal, CGFloat addVal, CGFloat multiVal))myLBound {
-    return ^id(id sizeVal, CGFloat addVal, CGFloat multiVal) {
-        [self _myLBound:sizeVal addVal:addVal multiVal:multiVal];
-        [self setNeedsLayout];
-        return self;
-    };
+- (MyLayoutSize *)myLBound:(id)sizeVal add:(CGFloat)addVal multi:(CGFloat)multiVal {
+    [self _myLBound:sizeVal addVal:addVal multiVal:multiVal];
+    [self setNeedsLayout];
+    return self;
 }
 
-- (MyLayoutSize * (^)(CGFloat val))myMax {
-    return ^id(CGFloat val) {
-        [self _myMax:val];
-        [self setNeedsLayout];
-        return self;
-    };
+- (MyLayoutSize *)myMax:(CGFloat)value {
+    [self _myMax:value];
+    [self setNeedsLayout];
+    return self;
 }
 
-- (MyLayoutSize * (^)(id sizeVal, CGFloat addVal, CGFloat multiVal))myUBound {
-    return ^id(id sizeVal, CGFloat addVal, CGFloat multiVal) {
-        [self _myUBound:sizeVal addVal:addVal multiVal:multiVal];
-        [self setNeedsLayout];
-        return self;
-    };
+- (MyLayoutSize *)myUBound:(id)sizeVal add:(CGFloat)addVal multi:(CGFloat)multiVal {
+    [self _myUBound:sizeVal addVal:addVal multiVal:multiVal];
+    [self setNeedsLayout];
+    return self;
+}
+
+- (MyLayoutSize *)myWrap{
+    [self _myEqualTo:@(MyLayoutValType_Wrap)];
+    [self setNeedsLayout];
+    return self;
 }
 
 - (void)myClear {
     [self _myClear];
     [self setNeedsLayout];
-}
-
-- (MyLayoutSize * (^)(id val))equalTo {
-    return self.myEqualTo;
-}
-
-- (MyLayoutSize * (^)(CGFloat val))add {
-    return self.myAdd;
-}
-
-- (MyLayoutSize * (^)(CGFloat val))multiply {
-    return self.myMultiply;
-}
-
-- (MyLayoutSize * (^)(CGFloat val))min {
-    return self.myMin;
-}
-
-- (MyLayoutSize * (^)(id sizeVal, CGFloat addVal, CGFloat multiVal))lBound {
-    return self.myLBound;
-}
-
-- (MyLayoutSize * (^)(CGFloat val))max {
-    return self.myMax;
-}
-
-- (MyLayoutSize * (^)(id sizeVal, CGFloat addVal, CGFloat multiVal))uBound {
-    return self.myUBound;
-}
-
-- (void)clear {
-    [self myClear];
 }
 
 - (void)setActive:(BOOL)active {
@@ -490,15 +457,14 @@
 
 @implementation MyLayoutSize (Clone)
 
-- (MyLayoutSize * (^)(CGFloat addVal, CGFloat multiVal))clone {
-    return ^id(CGFloat addVal, CGFloat multiVal) {
+- (MyLayoutSize *)myClone:(CGFloat)addVal multi:(CGFloat)multiVal {
+    
         MyLayoutSize *clonedAnchor = [[[self class] allocWithZone:nil] init];
         clonedAnchor->_addVal = addVal;
         clonedAnchor->_multiVal = multiVal;
         clonedAnchor->_val = self;
         clonedAnchor->_valType = MyLayoutValType_LayoutAnchorClone;
         return clonedAnchor;
-    };
 }
 
 @end

@@ -61,19 +61,19 @@
     [vertLayoutItemAddButon setTitle:@"Add" forState:UIControlStateNormal];
     [rootLayout addSubview:vertLayoutItemAddButon];
     vertLayoutItemAddButon.weight = 1.0;   //两个按钮的比重为1表明平分宽度。
-    vertLayoutItemAddButon.heightSize.equalTo(@(40));
+    [vertLayoutItemAddButon.heightSize myEqualTo:(@(40))];
     
     UIButton *vertLayoutItemRemoveButon = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [vertLayoutItemRemoveButon addTarget:self action:@selector(handleVertLayoutItemRemove:) forControlEvents:UIControlEventTouchUpInside];
     [vertLayoutItemRemoveButon setTitle:@"Remove" forState:UIControlStateNormal];
     [rootLayout addSubview:vertLayoutItemRemoveButon];
     vertLayoutItemRemoveButon.weight = 1.0;
-    vertLayoutItemRemoveButon.heightSize.equalTo(@(40));
+    [vertLayoutItemRemoveButon.heightSize myEqualTo:(@(40))];
     
     MyFlowLayout *vertContentLayout = [MyFlowLayout flowLayoutWithOrientation:MyOrientation_Vert arrangedCount:1];
     [rootLayout addSubview:vertContentLayout];
-    vertContentLayout.widthSize.equalTo(rootLayout.widthSize);
-    vertContentLayout.heightSize.equalTo(vertContentLayout.widthSize).multiply(3.0/5);
+    [vertContentLayout.widthSize myEqualTo:(rootLayout.widthSize)];
+    [[vertContentLayout.heightSize myEqualTo:(vertContentLayout.widthSize)] myMultiply:(3.0/5)];
     vertContentLayout.gravity = MyGravity_Horz_Fill | MyGravity_Vert_Center;  //整体水平填充和垂直居中
     //单独设置行内的停靠方向。
     vertContentLayout.lineGravity = ^MyGravity(MyFlowLayout *layout, NSInteger lineIndex, NSInteger itemCount, BOOL isLastLine) {
@@ -96,19 +96,19 @@
     [horzLayoutItemAddButon setTitle:@"Add" forState:UIControlStateNormal];
     [rootLayout addSubview:horzLayoutItemAddButon];
     horzLayoutItemAddButon.weight = 1.0;
-    horzLayoutItemAddButon.heightSize.equalTo(@(40));
+    [horzLayoutItemAddButon.heightSize myEqualTo:(@(40))];
     
     UIButton *horzLayoutItemRemoveButon = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [horzLayoutItemRemoveButon addTarget:self action:@selector(handleHorzLayoutItemRemove:) forControlEvents:UIControlEventTouchUpInside];
     [horzLayoutItemRemoveButon setTitle:@"Remove" forState:UIControlStateNormal];
     [rootLayout addSubview:horzLayoutItemRemoveButon];
     horzLayoutItemRemoveButon.weight = 1.0;
-    horzLayoutItemRemoveButon.heightSize.equalTo(@(40));
+    [horzLayoutItemRemoveButon.heightSize myEqualTo:(@(40))];
     
     MyFlowLayout *horzContentLayout = [MyFlowLayout flowLayoutWithOrientation:MyOrientation_Horz arrangedCount:1];
     [rootLayout addSubview:horzContentLayout];
-    horzContentLayout.widthSize.equalTo(rootLayout.widthSize);
-    horzContentLayout.heightSize.equalTo(horzContentLayout.widthSize).multiply(3.0/5);
+    [horzContentLayout.widthSize myEqualTo:(rootLayout.widthSize)];
+    [[horzContentLayout.heightSize myEqualTo:(horzContentLayout.widthSize)] myMultiply:(3.0/5)];
     horzContentLayout.gravity = MyGravity_Vert_Fill | MyGravity_Horz_Center;
     horzContentLayout.lineGravity = ^MyGravity(MyFlowLayout *layout, NSInteger lineIndex, NSInteger itemCount, BOOL isLastLine) {
         

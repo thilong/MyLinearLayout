@@ -114,8 +114,8 @@
     //_nameLabel的宽度根据内容自适应，但是最大的宽度是父视图的宽度的1倍，再减去5+14+5+14。这里的5是视图之间的间距，14是后面两个图片的宽度。
     //这个设置的意思是_nameLabel的宽可以动态增长，但是不能超过父视图的宽度，并且要保证后面的2个图片视图显示出来。
     //您可以通过uBound方法设置尺寸的最大上边界。具体参见对uBound的方法的详细介绍。
-    _nameLabel.widthSize.equalTo(@(MyLayoutSize.wrap)).uBound(userNameLayout.widthSize, -(5 + 14 + 5 + 14), 1);
-    _nameLabel.heightSize.equalTo(@25);
+    [[_nameLabel.widthSize myEqualTo:(@(MyLayoutSize.wrap))] myUBound:userNameLayout.widthSize add:-(5 + 14 + 5 + 14) multi:1];
+    [_nameLabel.heightSize myEqualTo:(@25)];
     [userNameLayout addSubview:_nameLabel];
     
     UIImageView *editImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"edit"]];
@@ -142,8 +142,8 @@
     _priceLabel.textAlignment = NSTextAlignmentRight;
     _priceLabel.adjustsFontSizeToFitWidth = YES;
     //宽度最宽为100,注意到这里使用了宏MYDIMESCALEW表示会根据屏幕的宽度来对100进行缩放。这个100是按iPhone6为标准设置的。具体请参考MyDimeScale类。
-    _priceLabel.widthSize.equalTo(@(MyLayoutSize.wrap)).uBound(@(MYDIMESCALEW(100)), 0, 1).lBound(@(MYDIMESCALEW(50)), 0, 1);
-    _priceLabel.heightSize.equalTo(@25);
+    [[[_priceLabel.widthSize myEqualTo:(@(MyLayoutSize.wrap))] myUBound:@(MYDIMESCALEW(100)) add:0 multi:1] myLBound:@(MYDIMESCALEW(50)) add:0 multi:1];
+    [_priceLabel.heightSize myEqualTo:(@25)];
     _priceLabel.myLeading = 10;
     [rootLayout addSubview:_priceLabel];
     
@@ -168,8 +168,8 @@
     
     
     _headImageView  = [UIImageView new];
-    _headImageView.centerYPos.equalTo(rootLayout.centerYPos);
-    _headImageView.leadingPos.equalTo(rootLayout.leadingPos);
+    [_headImageView.centerYPos myEqualTo:(rootLayout.centerYPos)];
+    [_headImageView.leadingPos myEqualTo:(rootLayout.leadingPos)];
     [rootLayout addSubview:_headImageView];
     
     _priceLabel = [UILabel new];
@@ -177,33 +177,33 @@
     _priceLabel.font = [CFTool font:14];
     _priceLabel.textAlignment = NSTextAlignmentRight;
     _priceLabel.adjustsFontSizeToFitWidth = YES;
-    _priceLabel.trailingPos.equalTo(rootLayout.trailingPos);
-    _priceLabel.centerYPos.equalTo(rootLayout.centerYPos);
+    [_priceLabel.trailingPos myEqualTo:(rootLayout.trailingPos)];
+    [_priceLabel.centerYPos myEqualTo:(rootLayout.centerYPos)];
     //priceLabel的宽度根据内容自适应，但是最大的宽度是100，最小的宽度是50。注意到这里使用了宏MYDIMESCALEW表示会根据屏幕的宽度来对100进行缩放。这个100是在DEMO中是按iPhone6为标准设置的。具体请参考MyDimeScale类的介绍。
-    _priceLabel.widthSize.equalTo(@(MyLayoutSize.wrap)).uBound(@(MYDIMESCALEW(100)), 0, 1).lBound(@(MYDIMESCALEW(50)), 0, 1);
-    _priceLabel.heightSize.equalTo(@25);
+    [[[_priceLabel.widthSize myEqualTo:(@(MyLayoutSize.wrap))] myUBound:@(MYDIMESCALEW(100)) add:0 multi:1] myLBound:@(MYDIMESCALEW(50)) add:0 multi:1];
+    [_priceLabel.heightSize myEqualTo:(@25)];
     [rootLayout addSubview:_priceLabel];
 
     
     _nameLabel = [UILabel new];
     _nameLabel.font = [CFTool font:17];
     _nameLabel.textColor = [CFTool color:3];
-    _nameLabel.widthSize.equalTo(@(MyLayoutSize.wrap)); //视图的宽度由内容包裹
-    _nameLabel.heightSize.equalTo(@25);
-    _nameLabel.leadingPos.equalTo(_headImageView.trailingPos);
+    [_nameLabel.widthSize myEqualTo:(@(MyLayoutSize.wrap))]; //视图的宽度由内容包裹
+    [_nameLabel.heightSize myEqualTo:(@25)];
+    [_nameLabel.leadingPos myEqualTo:(_headImageView.trailingPos)];
     //1.3.0版本最新支持。设置_nameLabel的右边距最大是_priceLabel的左边距，再偏移两个小图标和间距的距离。这样当_nameLabel的尺寸超过这个最大的右边距时就会自动的缩小视图的宽度。
-    _nameLabel.trailingPos.uBound(_priceLabel.leadingPos, (5 + 14 + 5 + 14));
+    [_nameLabel.trailingPos myUBound:_priceLabel.leadingPos offset:(5 + 14 + 5 + 14)];
     [rootLayout addSubview:_nameLabel];
     
     UIImageView *editImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"edit"]];
-    editImageView.leadingPos.equalTo(_nameLabel.trailingPos).offset(5);
-    editImageView.bottomPos.equalTo(_nameLabel.bottomPos);
+    [[editImageView.leadingPos myEqualTo:(_nameLabel.trailingPos)] myOffset:(5)];
+    [editImageView.bottomPos myEqualTo:(_nameLabel.bottomPos)];
     [rootLayout addSubview:editImageView];
 
     
     UIImageView *shareImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"del"]];
-    shareImageView.leadingPos.equalTo(editImageView.trailingPos).offset(5);
-    shareImageView.bottomPos.equalTo(editImageView.bottomPos);
+    [[shareImageView.leadingPos myEqualTo:(editImageView.trailingPos)] myOffset:(5)];
+    [shareImageView.bottomPos myEqualTo:(editImageView.bottomPos)];
     [rootLayout addSubview:shareImageView];
     
 
@@ -214,11 +214,11 @@
     _descLabel.adjustsFontSizeToFitWidth = YES;
     _descLabel.myHeight = MyLayoutSize.wrap;  //2行高度，高度根据内容确定。
     _descLabel.numberOfLines = 2;
-    _descLabel.leadingPos.equalTo(_nameLabel.leadingPos);
-    _descLabel.trailingPos.equalTo(_priceLabel.leadingPos).offset(10);
+    [_descLabel.leadingPos myEqualTo:(_nameLabel.leadingPos)];
+    [[_descLabel.trailingPos myEqualTo:(_priceLabel.leadingPos)] myOffset:(10)];
     [rootLayout addSubview:_descLabel];
     
-    _nameLabel.centerYPos.equalTo(@[_descLabel.centerYPos.offset(5)]);  //_nameLabel,_descLabel整体垂直居中。这里通过将centerYPos设置为一个数组的值来表示。具体参考关于相对布局的介绍和DEMO。
+    [_nameLabel.centerYPos myEqualTo:([_descLabel.centerYPos myOffset:(5)])];  //_nameLabel,_descLabel整体垂直居中。这里通过将centerYPos设置为一个数组的值来表示。具体参考关于相对布局的介绍和DEMO。
 
 }
 
@@ -240,7 +240,7 @@
     
     _headImageView = [UIImageView new];
     _headImageView.contentMode = UIViewContentModeScaleAspectFit;
-    _headImageView.heightSize.equalTo(rootLayout.heightSize);
+    [_headImageView.heightSize myEqualTo:(rootLayout.heightSize)];
     [rootLayout addSubview:_headImageView];
     
     
@@ -252,13 +252,13 @@
     _priceLabel.reverseFloat = YES;
     _priceLabel.myLeading = 10;
     //priceLabel的宽度根据内容自适应，但是最大的宽度是100，最小的宽度是50。注意到这里使用了宏MYDIMESCALEW表示会根据屏幕的宽度来对100进行缩放。这个100是在DEMO中是按iPhone6为标准设置的。具体请参考MyDimeScale类的介绍。
-    _priceLabel.widthSize.equalTo(@(MyLayoutSize.wrap)).uBound(@(MYDIMESCALEW(100)), 0, 1).lBound(@(MYDIMESCALEW(50)), 0, 1);
-    _priceLabel.heightSize.equalTo(rootLayout.heightSize);
+    [[[_priceLabel.widthSize myEqualTo:(@(MyLayoutSize.wrap))] myUBound:@(MYDIMESCALEW(100)) add:0 multi:1]myLBound:@(MYDIMESCALEW(50)) add:0 multi:1];
+    [_priceLabel.heightSize myEqualTo:(rootLayout.heightSize)];
     [rootLayout addSubview:_priceLabel];
     
     
     MyFloatLayout *userInfoLayout = [MyFloatLayout floatLayoutWithOrientation:MyOrientation_Vert];
-    userInfoLayout.heightSize.equalTo(rootLayout.heightSize);
+    [userInfoLayout.heightSize myEqualTo:(rootLayout.heightSize)];
     userInfoLayout.weight = 1;
     userInfoLayout.gravity = MyGravity_Vert_Center;
     userInfoLayout.subviewVSpace = 5;
@@ -271,8 +271,8 @@
     //_nameLabel的宽度根据内容自适应，但是最大的宽度是父视图的宽度的1倍，再减去5+14+5+14。这里的5是视图之间的间距，14是后面两个图片的宽度。
     //这个设置的意思是_nameLabel的宽可以动态增长，但是不能超过父视图的宽度，并且要保证后面的2个图片视图显示出来。
     //您可以通过uBound方法设置尺寸的最大上边界。具体参见对uBound的方法的详细介绍。
-    _nameLabel.widthSize.equalTo(@(MyLayoutSize.wrap)).uBound(userInfoLayout.widthSize, -(5 + 14 + 5 + 14), 1);
-    _nameLabel.heightSize.equalTo(@25);
+    [[_nameLabel.widthSize myEqualTo:(@(MyLayoutSize.wrap))] myUBound:userInfoLayout.widthSize add:-(5 + 14 + 5 + 14) multi:1];
+    [_nameLabel.heightSize myEqualTo:(@25)];
     [userInfoLayout addSubview:_nameLabel];
     
     UIImageView *editImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"edit"]];

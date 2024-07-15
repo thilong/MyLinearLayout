@@ -210,9 +210,9 @@ static CGFloat sTagWidth = 70;
             {
                 UIView *sectionView = [self createSectionView:sectionTitle image:sectionDict[@"sectionImage"]];
                 //宽度是布局视图宽度的1/4，因为视图之间是有间距的，所以这里每个视图的宽度都要再减去3/4的间距值。
-                sectionView.widthSize.equalTo(floatLayout.widthSize).multiply(1.0 / 4.0).add(-3.0 / 4.0 *floatLayout.subviewHSpace);
+                [[[sectionView.widthSize myEqualTo:(floatLayout.widthSize)] myMultiply:(1.0 / 4.0)] myAdd:(-3.0 / 4.0 *floatLayout.subviewHSpace)];
                 //高度是标签的2倍，但因为中间还包括了一个垂直间距的高度，所以这里要加上垂直间距的值。
-                sectionView.heightSize.equalTo(@(sTagHeight * 2)).add(floatLayout.subviewVSpace);
+                [[sectionView.heightSize myEqualTo:(@(sTagHeight * 2))] myAdd:(floatLayout.subviewVSpace)];
                 sectionView.clearFloat = YES;  //因为每个section总是新的一行开始。所以这里要把clearFloat设置为YES。
                 [floatLayout addSubview:sectionView];
                 
@@ -233,9 +233,9 @@ static CGFloat sTagWidth = 70;
             {
                 UIView *tagView = [self createTagView:tagstr];
                 //宽度是布局视图宽度的1/4，因为视图之间是有间距的，所以这里每个视图的宽度都要再减去3/4的间距值。
-                tagView.widthSize.equalTo(floatLayout.widthSize).multiply(1.0 / 4.0).add(-3.0 / 4.0 * floatLayout.subviewHSpace);
+                [[[tagView.widthSize myEqualTo:(floatLayout.widthSize)] myMultiply:(1.0 / 4.0)] myAdd:(-3.0 / 4.0 * floatLayout.subviewHSpace)];
                 //高度是固定的40
-                tagView.heightSize.equalTo(@(sTagHeight));
+                [tagView.heightSize myEqualTo:(@(sTagHeight))];
                 [floatLayout addSubview:tagView];
                 lastTagView = tagView;
 
@@ -294,8 +294,8 @@ static CGFloat sTagWidth = 70;
             if (sectionTitle.length > 0)
             {
                 UIView *sectionView = [self createSectionView:sectionTitle image:sectionDict[@"sectionImage"]];
-                sectionView.widthSize.equalTo(@(sTagWidth)); //固定宽度
-                sectionView.heightSize.equalTo(@(sTagHeight * 2)).add(floatLayout.subviewVSpace); //高度是标签的2倍，但因为中间还包括了一个垂直间距的高度，所以这里要加上垂直间距的值。
+                [sectionView.widthSize myEqualTo:(@(sTagWidth))]; //固定宽度
+                [[sectionView.heightSize myEqualTo:(@(sTagHeight * 2))] myAdd:(floatLayout.subviewVSpace)]; //高度是标签的2倍，但因为中间还包括了一个垂直间距的高度，所以这里要加上垂直间距的值。
 
                 sectionView.clearFloat = YES;  //因为每个section总是新的一行开始。所以这里要把clearFloat设置为YES。
                 [floatLayout addSubview:sectionView];
@@ -314,8 +314,8 @@ static CGFloat sTagWidth = 70;
             for (NSString *tagstr in sectionDict[@"tags"])
             {
                 UIView *tagView = [self createTagView:tagstr];
-                tagView.widthSize.equalTo(@(sTagWidth)); //宽度固定
-                tagView.heightSize.equalTo(@(sTagHeight)); //             高度是固定的40
+                [tagView.widthSize myEqualTo:(@(sTagWidth))]; //宽度固定
+                [tagView.heightSize myEqualTo:(@(sTagHeight))]; //             高度是固定的40
                 [floatLayout addSubview:tagView];
                 tagView.tag = (partIndex * 1000 + sectionIndex) * 1000 + tagIndex;
                 
@@ -356,7 +356,7 @@ static CGFloat sTagWidth = 70;
         button.layer.borderColor = [UIColor lightGrayColor].CGColor;
         button.layer.borderWidth = 0.5;
         button.myHeight = 44;
-        button.widthSize.equalTo(actionLayout.widthSize).multiply(1.0/actions.count).add(-2.5);  //宽度均分,这里减去2.5是因为有视图之间的间距为5
+        [[[button.widthSize myEqualTo:(actionLayout.widthSize)] myMultiply:(1.0/actions.count)] myAdd:(-2.5)];  //宽度均分,这里减去2.5是因为有视图之间的间距为5
         button.tag = i + 100;
         [button addTarget:self action:@selector(handleStyleChange:) forControlEvents:UIControlEventTouchUpInside];
         [actionLayout addSubview:button];
@@ -370,7 +370,7 @@ static CGFloat sTagWidth = 70;
 {
     
     MyLinearLayout *sectionLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
-    sectionLayout.heightSize.equalTo(nil);
+    [sectionLayout.heightSize myEqualTo:(nil)];
     sectionLayout.layer.cornerRadius = 5;
     sectionLayout.layer.borderColor = [UIColor lightGrayColor].CGColor;
     sectionLayout.layer.borderWidth = 0.5;

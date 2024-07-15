@@ -61,11 +61,11 @@
     [rootLayout setTarget:self action:@selector(handleHideKeyboard:)];  //设置布局上的触摸事件。布局视图支持触摸事件的设置，可以使用setTarget方法来实现。
     
     //设置布局视图的宽度等于父视图的宽度，这个方法等价于 rootLayout.myHorzMargin = 0;
-    rootLayout.widthSize.equalTo(scrollView.widthSize);
+    [rootLayout.widthSize myEqualTo:(scrollView.widthSize)];
     //设置布局视图的高度等于父视图的高度，并且最低高度不能低于568-64.这两个数字的意思是iPhone5的高度减去导航条的高度部分。这句话的意思也就是说明最低不能低于iPhone5的高度，因此在iPhone4上就会出现滚动的效果！！！通过lBound,uBound方法的应用可以很容易实现各种屏幕的完美适配！！。
     //rootLayout.heightSize.equalTo(scrollView.heightSize)等于于rootLayout.myTop = rootLayout.myBottom = 0;
     //请您分别测试在iPhone4设备和非iPhone4设备上的情况，看看这个神奇的效果。你不再需要写if条件来做适配处理了。
-    rootLayout.heightSize.equalTo(scrollView.heightSize).min(568 - 64);
+    [[rootLayout.heightSize myEqualTo:(scrollView.heightSize)] myMin:(568 - 64)];
     [scrollView addSubview:rootLayout];
     
     UILabel *userInfoLabel = [UILabel new];
@@ -77,7 +77,7 @@
     [userInfoLabel sizeToFit];
     userInfoLabel.myTop = 10;
     userInfoLabel.myCenterX = 0;
-    userInfoLabel.widthSize.uBound(rootLayout.widthSize, 0, 1);  //最大的宽度和父视图相等，这里第二个参数是第一个值的增量，第三个参数是第一个值的倍数
+    [userInfoLabel.widthSize myUBound:rootLayout.widthSize add:0 multi:1];  //最大的宽度和父视图相等，这里第二个参数是第一个值的增量，第三个参数是第一个值的倍数
     [rootLayout addSubview:userInfoLabel];
     
     
@@ -117,7 +117,7 @@
     userDescLabel.font = [CFTool font:14];
     [userDescLabel sizeToFit];
     userDescLabel.myTop = 10;
-    userDescLabel.leadingPos.equalTo(@0.05).min(17).max(19);
+    [[[userDescLabel.leadingPos myEqualTo:(@0.05)] myMin:(17)] myMax:(19)];
     [rootLayout addSubview:userDescLabel];
     
     
@@ -135,7 +135,7 @@
     textView.myTrailing = 0.05;
     textView.myBottom = 0.65;
     //虽然高度自适应，但是仍然不能超过300的高度以及不能小于60的高度。
-    textView.heightSize.equalTo(@(MyLayoutSize.wrap)).max(300).min(60);
+    [[[textView.heightSize myEqualTo:(@(MyLayoutSize.wrap))] myMax:(300)] myMin:(60)];
     [rootLayout addSubview:textView];
     
     

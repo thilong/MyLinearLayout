@@ -29,7 +29,7 @@
     MyLinearLayout *rootLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
     rootLayout.myHorzMargin = 0;
     rootLayout.gravity = MyGravity_Horz_Fill;
-    rootLayout.heightSize.lBound(scrollView.heightSize, 0, 1);
+    [rootLayout.heightSize myLBound:scrollView.heightSize add:0 multi:1];
     [scrollView addSubview:rootLayout];
     
     
@@ -38,7 +38,7 @@
     tipLabel.font = [CFTool font:16];
     tipLabel.textColor = [CFTool color:3];
     tipLabel.adjustsFontSizeToFitWidth = YES;
-    tipLabel.heightSize.equalTo(@(MyLayoutSize.wrap));
+    [tipLabel.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     [rootLayout addSubview:tipLabel];
     
     [self createDemo1:rootLayout];
@@ -82,7 +82,7 @@
     [rootLayout addSubview:tipLabel];
     
     MyLinearLayout *contentLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Horz];
-    contentLayout.heightSize.equalTo(@(MyLayoutSize.wrap));
+    [contentLayout.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     contentLayout.padding = UIEdgeInsetsMake(5, 5, 5, 5);
     contentLayout.subviewHSpace = 5;
  
@@ -95,8 +95,8 @@
     label1.font = [CFTool font:16];
     label1.backgroundColor = [CFTool color:5];
     label1.adjustsFontSizeToFitWidth = YES;
-    label1.heightSize.equalTo(@(MyLayoutSize.wrap));
-    label1.widthSize.equalTo(@(MyLayoutSize.wrap));
+    [label1.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
+    [label1.widthSize myEqualTo:(@(MyLayoutSize.wrap))];
     label1.widthSize.shrink = 0; //不压缩！
     [contentLayout addSubview:label1];
     
@@ -106,8 +106,8 @@
     label2.font = [CFTool font:16];
     label2.backgroundColor = [CFTool color:6];
     label2.adjustsFontSizeToFitWidth = YES;
-    label2.heightSize.equalTo(@(MyLayoutSize.wrap));
-    label2.widthSize.equalTo(@(MyLayoutSize.wrap));
+    [label2.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
+    [label2.widthSize myEqualTo:(@(MyLayoutSize.wrap))];
     label2.widthSize.shrink = 1; //压缩
     label2.numberOfLines = 1; //如果你只想要一行，那么要记得在设置包裹后设置行数。。
     [contentLayout addSubview:label2];
@@ -118,8 +118,8 @@
     label3.font = [CFTool font:15];
     label3.backgroundColor = [CFTool color:7];
     label3.adjustsFontSizeToFitWidth = YES;
-    label3.heightSize.equalTo(@(MyLayoutSize.wrap));
-    label3.widthSize.equalTo(@(MyLayoutSize.wrap));
+    [label3.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
+    [label3.widthSize myEqualTo:(@(MyLayoutSize.wrap))];
     label3.widthSize.shrink = 1; //压缩
     [contentLayout addSubview:label3];
     label3.myTrailing = 0.5;  //这句设置非常重要，设置为右间距为相对间距，从而达到如果屏幕小则会缩小固定尺寸，如果大则不会的效果。
@@ -303,7 +303,7 @@
     leadingLabel.font = [UIFont systemFontOfSize:14];
     leadingLabel.textColor = [UIColor redColor];
     leadingLabel.mySize = CGSizeMake(MyLayoutSize.wrap, MyLayoutSize.wrap);
-    leadingLabel.trailingPos.equalTo(@0.5); //设置右边的相对间距.
+    [leadingLabel.trailingPos myEqualTo:(@0.5)]; //设置右边的相对间距.
     [contentLayout addSubview:leadingLabel];
     leadingLabel.tag = 1000;
 
@@ -313,7 +313,7 @@
     trailingLabel.font = [UIFont systemFontOfSize:14];
     trailingLabel.textColor = [UIColor blueColor];
     trailingLabel.mySize = CGSizeMake(MyLayoutSize.wrap, MyLayoutSize.wrap);
-    trailingLabel.leadingPos.equalTo(@0.5); //设置右边的相对间距.
+    [trailingLabel.leadingPos myEqualTo:(@0.5)]; //设置右边的相对间距.
     [contentLayout addSubview:trailingLabel];
     trailingLabel.tag = 2000;
 
@@ -534,7 +534,7 @@
     contentLayout.gravity = MyGravity_Vert_Fill;
     contentLayout.padding = UIEdgeInsetsMake(5, 5, 5, 5);
     contentLayout.subviewHSpace = 5;
-    contentLayout.widthSize.lBound(scrollView.widthSize,0,1); //默认水平线性布局的宽度是自适应但是最小的宽度和父视图相等，这样对于一些大尺寸屏幕因为能够容纳内容而不会产生滚动。
+    [contentLayout.widthSize myLBound:scrollView.widthSize  add:0 multi:1]; //默认水平线性布局的宽度是自适应但是最小的宽度和父视图相等，这样对于一些大尺寸屏幕因为能够容纳内容而不会产生滚动。
     [scrollView addSubview:contentLayout];
     
     
@@ -553,8 +553,8 @@
     label2.backgroundColor = [CFTool color:6];
     [label2 sizeToFit];
     //中间视图的左边间距是0.5,右边间距是0.5。表明中间视图的左右间距占用剩余的空间而达到居中的效果。这样在屏幕尺寸足够时则会产生居中效果，而屏幕尺寸不足时则会缩小间距，但是这里面最左边的最小间距是0而最右边的最小间距是30，这样布局视图因为具有宽度自适应属性所以会扩充宽度而达到滚动的效果。
-    label2.leadingPos.equalTo(@0.5).min(0);
-    label2.trailingPos.equalTo(@0.5).min(30);
+    [[label2.leadingPos myEqualTo:(@0.5)] myMin:(0)];
+    [[label2.trailingPos myEqualTo:(@0.5)] myMin:(30)];
     [contentLayout addSubview:label2];
     
     //第三个子视图。
@@ -591,7 +591,7 @@
     contentLayout.gravity = MyGravity_Vert_Fill;
     contentLayout.padding = UIEdgeInsetsMake(5, 5, 5, 5);
     contentLayout.subviewHSpace = 5;
-    contentLayout.widthSize.lBound(scrollView.widthSize,0,1); //默认水平线性布局的宽度是自适应的但是最小的宽度和父视图相等，这样对于一些大尺寸屏幕因为能够容纳内容而不会产生滚动。
+    [contentLayout.widthSize myLBound:scrollView.widthSize add:0 multi:1]; //默认水平线性布局的宽度是自适应的但是最小的宽度和父视图相等，这样对于一些大尺寸屏幕因为能够容纳内容而不会产生滚动。
     [scrollView addSubview:contentLayout];
     
     
@@ -613,11 +613,11 @@
     
     //第三个子视图。
     UILabel *label3 = [UILabel new];
-    label3.text = @"第三个";
+    label3.text = @"第三个 leadingPos=0.5~<30";
     label3.font = [CFTool font:15];
     label3.backgroundColor = [CFTool color:7];
     [label3 sizeToFit];
-    label3.leadingPos.equalTo(@0.5).min(30); //最后一个视图的左边距占用剩余的空间，但是最低不能小于30。这样设置的意义是如果布局视图够宽则第三个子视图的左边间距是剩余的空间，这样就保证了第三个子视图总是在最右边。而如果剩余空间不够时，则因为这里最小的宽度是30，而布局视图又是宽度自适应,所以就会扩充布局视图的宽度，而产生滚动效果。这里的最小值30很重要，也就是第三个子视图和其他子视图的最小间距，具体设置多少就要看UI的界面效果图了。
+    [[label3.leadingPos myEqualTo:(@0.5)] myMin:(30)]; //最后一个视图的左边距占用剩余的空间，但是最低不能小于30。这样设置的意义是如果布局视图够宽则第三个子视图的左边间距是剩余的空间，这样就保证了第三个子视图总是在最右边。而如果剩余空间不够时，则因为这里最小的宽度是30，而布局视图又是宽度自适应,所以就会扩充布局视图的宽度，而产生滚动效果。这里的最小值30很重要，也就是第三个子视图和其他子视图的最小间距，具体设置多少就要看UI的界面效果图了。
     [contentLayout addSubview:label3];
     
 }
@@ -756,36 +756,36 @@
     
     MyLinearLayout *contentLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Horz];
     contentLayout.padding = UIEdgeInsetsMake(5, 5, 5, 5);
-    contentLayout.heightSize.equalTo(@(MyLayoutSize.wrap)).min(60);
+    [[contentLayout.heightSize myEqualTo:(@(MyLayoutSize.wrap))] myMin:(60)];
     contentLayout.gravity = MyGravity_Vert_Center;  //内容垂直居中。
     contentLayout.backgroundColor = [CFTool color:0];
     [rootLayout addSubview:contentLayout];
     
     UILabel *A = [self createLabel:@"不压缩" color:5];
-    A.widthSize.equalTo(@(MyLayoutSize.wrap));
-    A.heightSize.equalTo(@(MyLayoutSize.wrap));
+    [A.widthSize myEqualTo:(@(MyLayoutSize.wrap))];
+    [A.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     A.widthSize.shrink = 0;
     [contentLayout addSubview:A];
     
-    UILabel *B = [self createLabel:@"压缩1,间距不压缩" color:6];
-    B.widthSize.equalTo(@(MyLayoutSize.wrap));
-    B.heightSize.equalTo(@(MyLayoutSize.wrap));
+    UILabel *B = [self createLabel:@"压缩1,间距不压缩shrink=0" color:6];
+    [B.widthSize myEqualTo:(@(MyLayoutSize.wrap))];
+    [B.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     B.widthSize.shrink = 1;
-    B.leftPos.equalTo(@(20)).shrink = 0;
+    [B.leftPos myEqualTo:(@(20))].shrink = 0;
     [contentLayout addSubview:B];
     
-    UILabel *C  = [self createLabel:@"压缩2,间距压缩1" color:7];
-    C.widthSize.equalTo(@(MyLayoutSize.wrap));
-    C.heightSize.equalTo(@(MyLayoutSize.wrap));
+    UILabel *C  = [self createLabel:@"压缩2,间距压缩shrink=1" color:7];
+    [C.widthSize myEqualTo:(@(MyLayoutSize.wrap))];
+    [C.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     C.widthSize.shrink = 2;
-    C.leftPos.equalTo(@(20)).shrink = 1;
+    [C.leftPos myEqualTo:(@(20))].shrink = 1;
     [contentLayout addSubview:C];
     
-    UILabel *D = [self createLabel:@"压缩3,间距压缩2" color:8];
-    D.widthSize.equalTo(@(MyLayoutSize.wrap));
-    D.heightSize.equalTo(@(MyLayoutSize.wrap));
+    UILabel *D = [self createLabel:@"压缩3,间距压缩shrink=2" color:8];
+    [D.widthSize myEqualTo:(@(MyLayoutSize.wrap))];
+    [D.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     D.widthSize.shrink = 3;
-    D.leftPos.equalTo(@(20)).shrink = 2;
+    [D.leftPos myEqualTo:(@(20))].shrink = 2;
     [contentLayout addSubview:D];
 }
 

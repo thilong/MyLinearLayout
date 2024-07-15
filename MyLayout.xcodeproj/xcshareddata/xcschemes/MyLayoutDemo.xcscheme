@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "181A10B41EDF12CF00996203"
+               BuildableName = "MyLayout.framework"
+               BlueprintName = "MyLayout"
+               ReferencedContainer = "container:MyLayout.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "1840828C1B2C46E8003F378B"
                BuildableName = "MyLayoutDemo.app"
                BlueprintName = "MyLayoutDemo"

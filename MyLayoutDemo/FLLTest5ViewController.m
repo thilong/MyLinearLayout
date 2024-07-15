@@ -114,7 +114,7 @@
     MyFlowLayout *flowLayout = [MyFlowLayout flowLayoutWithOrientation:MyOrientation_Horz arrangedCount:3];
     flowLayout.pagedCount = 9; //pagedCount设置为非0时表示开始分页展示的功能，这里表示每页展示9个子视图，这个数量必须是arrangedCount的倍数。
     flowLayout.myWidth = MyLayoutSize.wrap; //设置布局视图的宽度由子视图包裹，当水平流式布局设置宽度自适应，并和pagedCount搭配使用会产生分页从左到右滚动的效果。
-    flowLayout.heightSize.equalTo(scrollView.heightSize); //因为是分页从左到右滚动，因此布局视图的高度必须设置为和父滚动视图相等。
+    [flowLayout.heightSize myEqualTo:(scrollView.heightSize)]; //因为是分页从左到右滚动，因此布局视图的高度必须设置为和父滚动视图相等。
     /*
      上面是实现一个水平流式布局分页且从左往右滚动的标准属性设置方法。
      */
@@ -154,7 +154,7 @@
     MyFlowLayout *flowLayout = [MyFlowLayout flowLayoutWithOrientation:MyOrientation_Horz arrangedCount:3];
     flowLayout.pagedCount = 9; //pagedCount设置为非0时表示开始分页展示的功能，这里表示每页展示9个子视图，这个数量必须是arrangedCount的倍数。
     flowLayout.myHeight = MyLayoutSize.wrap; //设置布局视图的高度由子视图包裹，当水平流式布局的高度自适应，并和pagedCount搭配使用会产生分页从上到下滚动的效果。
-    flowLayout.widthSize.equalTo(scrollView.widthSize); //因为是分页从左到右滚动，因此布局视图的宽度必须设置为和父滚动视图相等。
+    [flowLayout.widthSize myEqualTo:(scrollView.widthSize)]; //因为是分页从左到右滚动，因此布局视图的宽度必须设置为和父滚动视图相等。
     /*
      上面是实现一个水平流式布局分页且从上往下滚动的标准属性设置方法。
      */
@@ -196,7 +196,7 @@
     MyFlowLayout *flowLayout = [MyFlowLayout flowLayoutWithOrientation:MyOrientation_Vert arrangedCount:3];
     flowLayout.pagedCount = 9; //pagedCount设置为非0时表示开始分页展示的功能，这里表示每页展示9个子视图，这个数量必须是arrangedCount的倍数。
     flowLayout.myHeight = MyLayoutSize.wrap; //设置布局视图的高度由子视图包裹，当垂直流式布局的高度自适应，并和pagedCount搭配使用会产生分页从上到下滚动的效果。
-    flowLayout.widthSize.equalTo(scrollView.widthSize);
+    [flowLayout.widthSize myEqualTo:(scrollView.widthSize)];
     /*
      上面是实现一个垂直流式布局分页且从上往下滚动的标准属性设置方法。
      */
@@ -241,7 +241,7 @@
     MyFlowLayout *flowLayout = [MyFlowLayout flowLayoutWithOrientation:MyOrientation_Vert arrangedCount:3];
     flowLayout.pagedCount = 9; //pagedCount设置为非0时表示开始分页展示的功能，这里表示每页展示9个子视图，这个数量必须是arrangedCount的倍数。
     flowLayout.myWidth = MyLayoutSize.wrap; //设置布局视图的宽度由子视图包裹，当垂直流式布局的宽度自适应，并和pagedCount搭配使用会产生分页从左到右滚动的效果。
-    flowLayout.heightSize.equalTo(scrollView.heightSize);
+    [flowLayout.heightSize myEqualTo:(scrollView.heightSize)];
     /*
      上面是实现一个垂直流式布局分页且从左往右滚动的标准属性设置方法。
      */

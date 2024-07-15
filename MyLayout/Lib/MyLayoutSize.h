@@ -37,20 +37,6 @@
 /**特殊的尺寸，表示尺寸会均分父视图的剩余空间。目前只用在表格布局MyTableLayout */
 @property (class, nonatomic, assign, readonly) NSInteger average;
 
-//because masonry defined macro MAS_SHORTHAND_GLOBALS. the equalTo, offset may conflict with below method. so
-//if you used MyLayout and Masonry concurrently and you defined MAS_SHORTHAND_GLOBALS in masonry, then you can define MY_USEPREFIXMETHOD to solve the conflict.
-#ifdef MY_USEPREFIXMETHOD
-
-- (MyLayoutSize * (^)(id val))myEqualTo;
-- (MyLayoutSize * (^)(CGFloat val))myAdd;
-- (MyLayoutSize * (^)(CGFloat val))myMultiply;
-- (MyLayoutSize * (^)(CGFloat val))myMin;
-- (MyLayoutSize * (^)(id sizeVal, CGFloat addVal, CGFloat multiVal))myLBound;
-- (MyLayoutSize * (^)(CGFloat val))myMax;
-- (MyLayoutSize * (^)(id sizeVal, CGFloat addVal, CGFloat multiVal))myUBound;
-- (void)myClear;
-
-#else
 
 /**
  设置尺寸的具体值，这个具体值可以设置为NSNumber, MyLayoutSize以及NSArray<MyLayoutSize*>数组,UIView, MyLayoutMostSize和nil值。
@@ -69,22 +55,22 @@
    这个设置还有一个要求就是数组中的元素值如果是MyLayoutSize的话则要求这个尺寸必须在本视图之前就计算好的约束尺寸，否则可能设置无效。
  6. 设置为nil时则清除设置的具体值。
  */
-- (MyLayoutSize * (^)(id val))equalTo;
+- (MyLayoutSize *)myEqualTo:(id)value;
 
 /**
  *设置尺寸增加值，默认值是0。如果设置为负数则表示减少值
  */
-- (MyLayoutSize * (^)(CGFloat val))add;
+- (MyLayoutSize *)myAdd:(CGFloat)value;
 
 /**
  * 设置尺寸的放大缩小倍数，默认值是1。
  */
-- (MyLayoutSize * (^)(CGFloat val))multiply;
+- (MyLayoutSize *)myMultiply:(CGFloat)value;
 
 /**
  *设置尺寸的最小边界数值。min方法是lBound方法的简化版本。比如：A.min(10) <==>  A.lBound(@10, 0, 1)
  */
-- (MyLayoutSize * (^)(CGFloat val))min;
+- (MyLayoutSize *)myMin:(CGFloat)value;
 
 /**
   设置尺寸的最小边界值，如果尺寸对象没有设置最小边界值，那么最小边界默认就是无穷小-CGFLOAT_MAX。lBound方法除了能设置为数值外，还可以设置为MyLayoutSize值和MyLayoutMostSize值和nil值，并且还可以指定增量值和倍数值。
@@ -115,13 +101,13 @@
  
  multiVal 指定边界值的倍数值，如果没有倍数请设置为1。
  */
-- (MyLayoutSize * (^)(id sizeVal, CGFloat addVal, CGFloat multiVal))lBound;
+- (MyLayoutSize *)myLBound:(id)sizeVal add:(CGFloat)addVal multi:(CGFloat)multiVal;
 
 
 /**
  *设置尺寸的最大边界数值。max方法是uBound方法的简化版本。比如：A.max(10) <==>  A.uBound(@10, 0, 1)
  */
-- (MyLayoutSize * (^)(CGFloat val))max;
+- (MyLayoutSize *)myMax:(CGFloat)value;
 
 /**
  设置尺寸的最大边界值，如果尺寸对象没有设置最大边界值，那么最大边界默认就是无穷大CGFLOAT_MAX。uBound方法除了能设置为数值外，还可以设置为MyLayoutSize值和MyLayoutMostSize值和nil值，并且还可以指定增量值和倍数值。
@@ -152,14 +138,20 @@
  
  multiVal 指定边界值的倍数值，如果没有倍数请设置为1。
  */
-- (MyLayoutSize * (^)(id sizeVal, CGFloat addVal, CGFloat multiVal))uBound;
+- (MyLayoutSize *)myUBound:(id)sizeVal add:(CGFloat)addVal multi:(CGFloat)multiVal;
+
+
+/**
+ *设置对象宽/高度为自适应
+ */
+- (MyLayoutSize *)myWrap;
 
 /**
  *清除所有设置的约束值，这样尺寸对象将不会再生效了。
  */
-- (void)clear;
+- (void)myClear;
 
-#endif
+
 
 /**
  *设置布局尺寸是否是活动的,默认是YES表示活动的，如果设置为NO则表示这个布局尺寸对象设置的约束值将不会起作用。
@@ -216,7 +208,9 @@
 @interface MyLayoutSize (Clone)
 
 //从布局尺寸中克隆一个尺寸对象来。这个克隆出来的尺寸值是源尺寸对象的值乘以multival再加上addVal。这个方法通常用于下面数组元素的构造
-- (MyLayoutSize * (^)(CGFloat addVal, CGFloat multiVal))clone;
+- (MyLayoutSize *)myClone:(CGFloat)addVal multi:(CGFloat)multiVal;
+
+
 
 @end
 

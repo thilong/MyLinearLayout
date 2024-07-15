@@ -34,8 +34,8 @@
     //背景占用用户信息布局的一半高度，宽度和布局一样宽
     UIImageView *backImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bk1"]];
     backImageView.contentMode = UIViewContentModeScaleToFill;
-    backImageView.heightSize.equalTo(rootLayout.heightSize).multiply(0.5);
-    backImageView.widthSize.equalTo(rootLayout.widthSize);
+    [[backImageView.heightSize myEqualTo:(rootLayout.heightSize)] myMultiply:(0.5)];
+    [backImageView.widthSize myEqualTo:(rootLayout.widthSize)];
     [rootLayout addSubview:backImageView];
     
     //右上角图片
@@ -54,10 +54,10 @@
     headImage.layer.masksToBounds = YES;
     headImage.layer.cornerRadius = 5;
     headImage.layer.borderWidth = 0.5;
-    headImage.heightSize.equalTo(rootLayout.heightSize).multiply(1.0/3); //高度是父布局高度1/3
-    headImage.widthSize.equalTo(headImage.heightSize);    //宽度等于高度
-    headImage.centerXPos.equalTo(@0);
-    headImage.centerYPos.equalTo(@0);
+    [[headImage.heightSize myEqualTo:(rootLayout.heightSize)] myMultiply:(1.0/3)]; //高度是父布局高度1/3
+    [headImage.widthSize myEqualTo:(headImage.heightSize)];    //宽度等于高度
+    [headImage.centerXPos myEqualTo:(@0)];
+    [headImage.centerYPos myEqualTo:(@0)];
     [rootLayout addSubview:headImage];
     
     
@@ -68,32 +68,32 @@
     nickName.textColor = [CFTool color:0];
     nickName.font = [CFTool font:17];
     [nickName sizeToFit];
-    nickName.centerXPos.equalTo(@0);
-    nickName.centerYPos.equalTo(@(1/6.0)).offset(nickName.frame.size.height / 2); //对于框架布局来说中心点偏移也可以设置为相对偏移。
+    [nickName.centerXPos myEqualTo:(@0)];
+    [[nickName.centerYPos myEqualTo:(@(1/6.0))] myOffset:(nickName.frame.size.height / 2)]; //对于框架布局来说中心点偏移也可以设置为相对偏移。
     [rootLayout addSubview:nickName];
     
     
     //左中右三张图片,设定宽度和限制高度。
     UIImageView *leadingView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image2"]];
-    leadingView.widthSize.equalTo(rootLayout.widthSize).multiply(1/3.0); // 宽度是父布局宽度的1/3
-    leadingView.heightSize.equalTo(leadingView.widthSize).max(100);  //高度和宽度相等，当最大只能是100
-    leadingView.leadingPos.equalTo(@0);
-    leadingView.bottomPos.equalTo(@0);
+    [[leadingView.widthSize myEqualTo:(rootLayout.widthSize)] myMultiply:(1/3.0)]; // 宽度是父布局宽度的1/3
+    [[leadingView.heightSize myEqualTo:(leadingView.widthSize)] myMax:(100)];  //高度和宽度相等，当最大只能是100
+    [leadingView.leadingPos myEqualTo:(@0)];
+    [leadingView.bottomPos myEqualTo:(@0)];
     [rootLayout addSubview:leadingView];
     
     UIImageView *centerView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image3"]];
-    centerView.widthSize.equalTo(rootLayout.widthSize).multiply(1/3.0);
-    centerView.heightSize.equalTo(centerView.widthSize).max(100);
-    centerView.centerXPos.equalTo(@0);
-    centerView.bottomPos.equalTo(@0);
+    [[centerView.widthSize myEqualTo:(rootLayout.widthSize)] myMultiply:(1/3.0)];
+    [[centerView.heightSize myEqualTo:(centerView.widthSize)] myMax:(100)];
+    [centerView.centerXPos myEqualTo:(@0)];
+    [centerView.bottomPos myEqualTo:(@0)];
     [rootLayout addSubview:centerView];
 
     
     UIImageView *trailingView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image4"]];
-    trailingView.widthSize.equalTo(rootLayout.widthSize).multiply(1/3.0);
-    trailingView.heightSize.equalTo(trailingView.widthSize).max(100);
-    trailingView.trailingPos.equalTo(@0);
-    trailingView.bottomPos.equalTo(@0);
+    [[trailingView.widthSize myEqualTo:(rootLayout.widthSize)] myMultiply:(1/3.0)];
+    [[trailingView.heightSize myEqualTo:(trailingView.widthSize)] myMax:(100)];
+    [trailingView.trailingPos myEqualTo:(@0)];
+    [trailingView.bottomPos myEqualTo:(@0)];
     [rootLayout addSubview:trailingView];
     
 }

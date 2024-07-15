@@ -6,6 +6,9 @@
 //  Copyright (c) 2015年 YoungSoft. All rights reserved.
 //
 
+#ifndef MYLAYOUTDEF
+#define MYLAYOUTDEF
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -271,3 +274,4 @@ typedef enum : unsigned char {
   MySizeClass_Landscape =
       0x80,  //横屏,注意横屏和竖屏不支持 | 运算操作，只能指定一个。
 } MySizeClass;
+#endif

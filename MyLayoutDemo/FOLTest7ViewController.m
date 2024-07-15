@@ -104,14 +104,14 @@
     UIView *line1 = [UIView new];
     line1.backgroundColor = [CFTool color:5];
     line1.myHeight = 2;
-    line1.widthSize.equalTo(floatLayout.widthSize); //宽度和父视图一样宽。
+    [line1.widthSize myEqualTo:(floatLayout.widthSize)]; //宽度和父视图一样宽。
     [floatLayout addSubview:line1];
     
     
     UIImageView *showImageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image2"]];
     showImageView1.myMargin = 10;  //四周边距是10
     showImageView1.weight = 0.6;   //此时父布局的剩余宽度是屏幕，因此这里的宽度就是屏幕宽度的0.6
-    showImageView1.heightSize.equalTo(showImageView1.widthSize);  //高度等于宽度。
+    [showImageView1.heightSize myEqualTo:(showImageView1.widthSize)];  //高度等于宽度。
     [floatLayout addSubview:showImageView1];
     
     
@@ -119,7 +119,7 @@
     UIView *line2 = [UIView new];
     line2.backgroundColor = [CFTool color:5];
     line2.myWidth = 2;
-    line2.heightSize.equalTo(showImageView1.heightSize).add(22); //高度和showImageView1高度相等，因为showImageView1还有上下分别为10的边距,还有中间横线的高度2，所以这里要增加22的高度。
+    [[line2.heightSize myEqualTo:(showImageView1.heightSize)] myAdd:(22)]; //高度和showImageView1高度相等，因为showImageView1还有上下分别为10的边距,还有中间横线的高度2，所以这里要增加22的高度。
     [floatLayout addSubview:line2];
     
     
@@ -127,7 +127,7 @@
     UIImageView *showImageView2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image3"]];
     showImageView2.myMargin = 10;  //四周边距是10
     showImageView2.weight = 1.0;    //注意这里是剩余宽度的比重，因为这个小图要占用全部的剩余空间，因此这里设置为1。
-    showImageView2.heightSize.equalTo(showImageView1.heightSize).multiply(0.5).add(-10);  //高度等于大图高度的一半，再减去多余的边距10
+    [[[showImageView2.heightSize myEqualTo:(showImageView1.heightSize)] myMultiply:(0.5)] myAdd:(-10)];  //高度等于大图高度的一半，再减去多余的边距10
     [floatLayout addSubview:showImageView2];
     
     
@@ -142,7 +142,7 @@
     UIImageView *showImageView3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image4"]];
     showImageView3.myMargin = 10;
     showImageView3.weight = 1.0;
-    showImageView3.heightSize.equalTo(showImageView1.heightSize).multiply(0.5).add(-10);
+    [[[showImageView3.heightSize myEqualTo:(showImageView1.heightSize)] myMultiply:(0.5)] myAdd:(-10)];
     [floatLayout addSubview:showImageView3];
     
     //绘制下面的横线。
@@ -182,7 +182,7 @@
     line5.backgroundColor = [CFTool color:5];
     line5.myHeight = 2;
     line5.myVertMargin = 10;
-    line5.widthSize.equalTo(floatLayout.widthSize);
+    [line5.widthSize myEqualTo:(floatLayout.widthSize)];
     [floatLayout addSubview:line5];
     
     
@@ -215,7 +215,7 @@
     UIView *line6 = [UIView new];
     line6.backgroundColor = [CFTool color:5];
     line6.myHeight = 2;
-    line6.widthSize.equalTo(floatLayout.widthSize);
+    [line6.widthSize myEqualTo:(floatLayout.widthSize)];
     [floatLayout addSubview:line6];
     
 
@@ -237,7 +237,7 @@
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:names[i]]];
         imageView.layer.borderWidth = 0.5;
         imageView.layer.borderColor = [CFTool color:6].CGColor;
-        imageView.heightSize.equalTo(floatLayout.heightSize).multiply(0.5).add(-5); //高度等于父视图的高度的一半，因为设置了每个子视图的间距为10，所以这里要减去5。
+        [[[imageView.heightSize myEqualTo:(floatLayout.heightSize)] myMultiply:(0.5)] myAdd:(-5)]; //高度等于父视图的高度的一半，因为设置了每个子视图的间距为10，所以这里要减去5。
         if (i % 2 == 0)
         {//这句话的意思一列显示两个子视图，所以当索引下标为偶数时就是换列处理。
             imageView.clearFloat = YES;

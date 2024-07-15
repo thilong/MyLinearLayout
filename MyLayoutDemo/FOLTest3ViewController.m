@@ -152,8 +152,8 @@
     [itemLayout addSubview:titleLabel];
     
     itemLayout.gravity = MyGravity_Vert_Bottom; //将整个布局中的所有子视图垂直居底部。
-    itemLayout.heightSize.equalTo(_floatLayout.heightSize).multiply(2.0/5);  //布局的高度是父布局的2/5。
-    itemLayout.widthSize.equalTo(_floatLayout.widthSize);   //布局的宽度和父布局相等。
+    [[itemLayout.heightSize myEqualTo:(_floatLayout.heightSize)] myMultiply:(2.0/5)];  //布局的高度是父布局的2/5。
+    [itemLayout.widthSize myEqualTo:(_floatLayout.widthSize)];   //布局的宽度和父布局相等。
    
     return itemLayout;
 }
@@ -187,8 +187,8 @@
     [itemLayout addSubview:sourceLabel];
     
     itemLayout.gravity = MyGravity_Vert_Center;  //将整个布局中的所有子视图整体垂直居中。
-    itemLayout.heightSize.equalTo(_floatLayout.heightSize).multiply(1.0/5);  //布局高度是父布局的1/5
-    itemLayout.widthSize.equalTo(_floatLayout.widthSize);   //布局宽度和父布局相等。
+    [[itemLayout.heightSize myEqualTo:(_floatLayout.heightSize)] myMultiply:(1.0/5)];  //布局高度是父布局的1/5
+    [itemLayout.widthSize myEqualTo:(_floatLayout.widthSize)];   //布局宽度和父布局相等。
     
     return itemLayout;
     
@@ -223,8 +223,8 @@
     [itemLayout addSubview:sourceLabel];
     
     itemLayout.gravity = MyGravity_Vert_Center;   //将整个布局中的所有子视图整体垂直居中。
-    itemLayout.heightSize.equalTo(_floatLayout.heightSize).multiply(1.0/5);  //布局高度是父布局的1/5
-    itemLayout.widthSize.equalTo(_floatLayout.widthSize).multiply(0.5);      //布局宽度是父布局的一半。
+    [[itemLayout.heightSize myEqualTo:(_floatLayout.heightSize)] myMultiply:(1.0/5)];  //布局高度是父布局的1/5
+    [[itemLayout.widthSize myEqualTo:(_floatLayout.widthSize)] myMultiply:(0.5)];      //布局宽度是父布局的一半。
     
     return itemLayout;
 

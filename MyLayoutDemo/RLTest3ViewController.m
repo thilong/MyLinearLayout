@@ -5,9 +5,9 @@
 //  Created by oybq on 15/7/9.
 //  Copyright (c) 2015年 YoungSoft. All rights reserved.
 //
+#import <MyLayout/MyLayout.h>
 
 #import "RLTest3ViewController.h"
-#import "MyLayout.h"
 #import "CFTool.h"
 
 @interface RLTest3ViewController ()
@@ -39,12 +39,12 @@
     layout3.backgroundColor = [CFTool color:0];
     
     
-    layout1.widthSize.equalTo(rootLayout.widthSize);
-    layout2.widthSize.equalTo(rootLayout.widthSize);
-    layout3.widthSize.equalTo(rootLayout.widthSize);
-    layout1.heightSize.equalTo(@[layout2.heightSize.add(-10), layout3.heightSize]).add(-10); //均分三个布局的高度。
-    layout2.topPos.equalTo(layout1.bottomPos).offset(10);
-    layout3.topPos.equalTo(layout2.bottomPos).offset(10);
+    [layout1.widthSize myEqualTo:(rootLayout.widthSize)];
+    [layout2.widthSize myEqualTo:(rootLayout.widthSize)];
+    [layout3.widthSize myEqualTo:(rootLayout.widthSize)];
+    [[layout1.heightSize myEqualTo:(@[[layout2.heightSize myAdd:(-10)], layout3.heightSize])] myAdd:(-10)]; //均分三个布局的高度。
+    [[layout2.topPos myEqualTo:(layout1.bottomPos)] myOffset:(10)];
+    [[layout3.topPos myEqualTo:(layout2.bottomPos)] myOffset:(10)];
     
     
     [rootLayout addSubview:layout1];
@@ -93,25 +93,26 @@
     titleLabel.font = [CFTool font:16];
     titleLabel.textColor = [CFTool color:4];
     [titleLabel sizeToFit];
-    titleLabel.leadingPos.equalTo(@5);
+    [titleLabel.leadingPos myEqualTo:(@5)];
     [layout addSubview:titleLabel];
     
     
-    UIView *v1 = [self createLabel:@"A" backgroundColor:[CFTool color:5]];
-    v1.widthSize.equalTo(@100);
-    v1.heightSize.equalTo(@50);
-    v1.centerYPos.equalTo(@0);
+    UIView *v1 = [self createLabel:@"A" backgroundColor:[CFTool color:4]];
+    [v1.widthSize myEqualTo:(@100)];
+    [v1.heightSize myEqualTo:(@50)];
+    [v1.centerYPos myEqualTo:(@0)];
     [layout addSubview:v1];
     
     
     UIView *v2 = [self createLabel:@"B" backgroundColor:[CFTool color:6]];
-    v2.widthSize.equalTo(@50);
-    v2.heightSize.equalTo(@50);
-    v2.centerYPos.equalTo(@0);
+    [v2.widthSize myEqualTo:(@50)];
+    [v2.heightSize myEqualTo:(@30)];
+    [v2.centerYPos myEqualTo:(@0)];
     [layout addSubview:v2];
     
     //通过为centerXPos等于一个数组值，表示v1和v2在父布局视图之内整体水平居中,这里的20表示v1和v2之间还有20的间隔。
-    v1.centerXPos.equalTo(@[v2.centerXPos.offset(20)]);
+
+    [v1.centerXPos myEqualTo:@[[v2.centerXPos myOffset:(20)]]];
     
     
     
@@ -128,25 +129,25 @@
     titleLabel.font = [CFTool font:16];
     titleLabel.textColor = [CFTool color:4];
     [titleLabel sizeToFit];
-    titleLabel.leadingPos.equalTo(@5);
+    [titleLabel.leadingPos myEqualTo:(@5)];
     [layout addSubview:titleLabel];
     
     
     UIView *v1 = [self createLabel:@"A" backgroundColor:[CFTool color:5]];
-    v1.widthSize.equalTo(@200);
-    v1.heightSize.equalTo(@50);
-    v1.centerXPos.equalTo(@0);
+    [v1.widthSize myEqualTo:(@200)];
+    [v1.heightSize myEqualTo:(@50)];
+    [v1.centerXPos myEqualTo:(@0)];
     [layout addSubview:v1];
     
     
     UIView *v2 = [self createLabel:@"B" backgroundColor:[CFTool color:6]];
-    v2.widthSize.equalTo(@200);
-    v2.heightSize.equalTo(@30);
-    v2.centerXPos.equalTo(@0);
+    [v2.widthSize myEqualTo:(@200)];
+    [v2.heightSize myEqualTo:(@30)];
+    [v2.centerXPos myEqualTo:(@0)];
     [layout addSubview:v2];
     
     //通过为centerYPos等于一个数组值，表示v1和v2在父布局视图之内整体垂直居中,这里的20表示v1和v2之间还有20的间隔。
-    v1.centerYPos.equalTo(@[v2.centerYPos.offset(10)]);
+    [v1.centerYPos myEqualTo:@[[v2.centerYPos myOffset:(20)]]];
     
     return layout;
 }
@@ -161,7 +162,7 @@
     titleLabel.font = [CFTool font:16];
     titleLabel.textColor = [CFTool color:4];
     [titleLabel sizeToFit];
-    titleLabel.leadingPos.equalTo(@5);
+    [titleLabel.leadingPos myEqualTo:(@5)];
     [layout addSubview:titleLabel];
     
     UILabel *lb1up = [self createLabel:@"top leading" backgroundColor:[CFTool color:5]];
@@ -185,17 +186,17 @@
     [layout addSubview:lb3down];
     
     //左，中，右三组视图分别整体垂直居中显示，并且下面和上面间隔10
-    lb1up.centerYPos.equalTo(@[lb1down.centerYPos.offset(10)]);
-    lb2up.centerYPos.equalTo(@[lb2down.centerYPos.offset(10)]);
-    lb3up.centerYPos.equalTo(@[lb3down.centerYPos.offset(10)]);
+    [lb1up.centerYPos myEqualTo:@[[lb1down.centerYPos myOffset:(10)]]];
+    [lb2up.centerYPos myEqualTo:@[[lb2down.centerYPos myOffset:(10)]]];
+    [lb3up.centerYPos myEqualTo:@[[lb3down.centerYPos myOffset:(10)]]];
     
     //上面的三个视图整体水平居中显示并且间隔60
-    lb1up.centerXPos.equalTo(@[lb2up.centerXPos.offset(60),lb3up.centerXPos.offset(60)]);
+    [lb1up.centerXPos myEqualTo:(@[[lb2up.centerXPos myOffset:(60)],[lb3up.centerXPos myOffset:(60)]])];
     
     //下面的三个视图的水平中心点和上面三个视图的水平中心点对齐
-    lb1down.centerXPos.equalTo(lb1up.centerXPos);
-    lb2down.centerXPos.equalTo(lb2up.centerXPos);
-    lb3down.centerXPos.equalTo(lb3up.centerXPos);
+    [lb1down.centerXPos myEqualTo:(lb1up.centerXPos)];
+    [lb2down.centerXPos myEqualTo:(lb2up.centerXPos)];
+    [lb3down.centerXPos myEqualTo:(lb3up.centerXPos)];
     
     
     

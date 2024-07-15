@@ -71,8 +71,8 @@
     
     MyLinearLayout *rootLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
     rootLayout.insetsPaddingFromSafeArea = ~UIRectEdgeBottom;  //为了防止拉到底部时iPhoneX设备的抖动发生，不能将底部安全区叠加到padding中去。
-    rootLayout.widthSize.equalTo(scrollView.widthSize);
-    rootLayout.heightSize.equalTo(@(MyLayoutSize.wrap));
+    [rootLayout.widthSize myEqualTo:(scrollView.widthSize)];
+    [rootLayout.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     rootLayout.padding = UIEdgeInsetsMake(10, 10, 10, 10);
     rootLayout.gravity = MyGravity_Horz_Fill;
     [scrollView addSubview:rootLayout];
@@ -81,24 +81,24 @@
     
     //添加色块。
     UILabel *v1 = [self createLabel:NSLocalizedString(@"Scroll the view please", @"") backgroundColor:[CFTool color:1]];
-    v1.heightSize.equalTo(@80);
+    [v1.heightSize myEqualTo:(@80)];
     [rootLayout addSubview:v1];
         
     //这是一个停靠的视图。
     UIView *v2 = [self createLabel:@"This is a dock view1" backgroundColor:[CFTool color:2]];
-    v2.heightSize.equalTo(@60);
+    [v2.heightSize myEqualTo:(@60)];
     [rootLayout addSubview:v2];
     DockViewInfo *dockViewInfo1 = [DockViewInfo new];
     dockViewInfo1.dockView = v2;
     [self.dockViewInfos addObject:dockViewInfo1];
     
     UIView *v3 = [self createLabel:@"This is scrolled view ................" backgroundColor:[CFTool color:3]];
-    v3.heightSize.equalTo(@100);
+    [v3.heightSize myEqualTo:(@100)];
     [rootLayout addSubview:v3];
     
     
     UIView *v4 = [self createLabel:@"This is a dock view2" backgroundColor:[CFTool color:4]];
-    v4.heightSize.equalTo(@40);
+    [v4.heightSize myEqualTo:(@40)];
     [rootLayout addSubview:v4];
     
     DockViewInfo *dockViewInfo2 = [DockViewInfo new];
@@ -106,12 +106,12 @@
     [self.dockViewInfos addObject:dockViewInfo2];
     
     UIView *v5 = [self createLabel:@"This is scrolled view ................" backgroundColor:[CFTool color:5]];
-    v5.heightSize.equalTo(@100);
+    [v5.heightSize myEqualTo:(@100)];
     [rootLayout addSubview:v5];
     
     
     UIView *v6 = [self createLabel:@"This is a dock view3" backgroundColor:[CFTool color:6]];
-    v6.heightSize.equalTo(@40);
+    [v6.heightSize myEqualTo:(@40)];
     [rootLayout addSubview:v6];
     
     DockViewInfo *dockViewInfo3 = [DockViewInfo new];
@@ -120,11 +120,11 @@
 
     
     UILabel *v7 = [self createLabel:NSLocalizedString(@"This is scrolled view ................", @"") backgroundColor:[CFTool color:7]];
-    v7.heightSize.equalTo(@800);
+    [v7.heightSize myEqualTo:(@800)];
     [rootLayout addSubview:v7];
     
     UILabel *v8 = [self createLabel:NSLocalizedString(@"This is last view", @"") backgroundColor:[CFTool color:8]];
-    v8.heightSize.equalTo(@80);
+    [v8.heightSize myEqualTo:(@80)];
     [rootLayout addSubview:v8];
 
 }

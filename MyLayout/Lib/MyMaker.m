@@ -227,24 +227,24 @@
                 if ([val isKindOfClass:[NSNumber class]]) {
                     id oldVal = [myView valueForKey:key];
                     if ([oldVal isKindOfClass:[MyLayoutPos class]]) {
-                        ((MyLayoutPos *)oldVal).myEqualTo(val);
+                        [((MyLayoutPos *)oldVal) myEqualTo:(val)];
                     } else if ([oldVal isKindOfClass:[MyLayoutSize class]]) {
-                        ((MyLayoutSize *)oldVal).myEqualTo(val);
+                        [((MyLayoutSize *)oldVal) myEqualTo:(val)];
                     } else {
                         [myView setValue:val forKey:key];
                     }
                 } else if ([val isKindOfClass:[MyLayoutPos class]]) {
-                    ((MyLayoutPos *)[myView valueForKey:key]).myEqualTo(val);
+                    [((MyLayoutPos *)[myView valueForKey:key]) myEqualTo:(val)];
                 } else if ([val isKindOfClass:[MyLayoutSize class]]) {
-                    ((MyLayoutSize *)[myView valueForKey:key]).myEqualTo(val);
+                    [((MyLayoutSize *)[myView valueForKey:key]) myEqualTo:(val)];
                 } else if ([val isKindOfClass:[NSArray class]]) {
-                    ((MyLayoutSize *)[myView valueForKey:key]).myEqualTo(val);
+                    [((MyLayoutSize *)[myView valueForKey:key]) myEqualTo:(val)];
                 } else if ([val isKindOfClass:[UIView class]]) {
                     id oldVal = [val valueForKey:key];
                     if ([oldVal isKindOfClass:[MyLayoutPos class]]) {
-                        ((MyLayoutPos *)[myView valueForKey:key]).myEqualTo(oldVal);
+                        [((MyLayoutPos *)[myView valueForKey:key]) myEqualTo:(oldVal)];
                     } else if ([oldVal isKindOfClass:[MyLayoutSize class]]) {
-                        ((MyLayoutSize *)[myView valueForKey:key]).myEqualTo(oldVal);
+                        [((MyLayoutSize *)[myView valueForKey:key]) myEqualTo:(oldVal)];
                     } else {
                         [myView setValue:oldVal forKey:key];
                     }

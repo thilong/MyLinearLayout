@@ -89,9 +89,9 @@ const int MyFlex_Auto = -1;
 
 - (void)setWidth:(CGFloat)width {
     if (width > 0 && width < 1) {
-        self.view.widthSize.equalTo(@(MyLayoutSize.fill)).multiply(width);
+        [[self.view.widthSize myEqualTo:(@(MyLayoutSize.fill))] myMultiply:(width)];
     } else {
-        self.view.widthSize.equalTo(@(width));
+        [self.view.widthSize myEqualTo:(@(width))];
     }
 }
 
@@ -111,9 +111,9 @@ const int MyFlex_Auto = -1;
 
 - (void)setHeight:(CGFloat)height {
     if (height > 0 && height < 1) {
-        self.view.heightSize.equalTo(@(MyLayoutSize.fill)).multiply(height);
+        [[self.view.heightSize myEqualTo:(@(MyLayoutSize.fill))] myMultiply:(height)];
     } else {
-        self.view.heightSize.equalTo(@(height));
+        [self.view.heightSize myEqualTo:(@(height))];
     }
 }
 
@@ -243,9 +243,9 @@ const int MyFlex_Auto = -1;
 - (id<MyFlexItem> (^)(CGFloat))width {
     return ^id(CGFloat val) {
         if (val > 0 && val < 1) {
-            self.view.widthSize.equalTo(@(MyLayoutSize.fill)).multiply(val);
+            [[self.view.widthSize myEqualTo:(@(MyLayoutSize.fill))] myMultiply:(val)];
         } else {
-            self.view.widthSize.equalTo(@(val));
+            [self.view.widthSize myEqualTo:(@(val))];
         }
         return self;
     };
@@ -253,21 +253,21 @@ const int MyFlex_Auto = -1;
 
 - (id<MyFlexItem> (^)(CGFloat percent, CGFloat inc))width_percent {
     return ^id(CGFloat percent, CGFloat inc) {
-        self.view.widthSize.equalTo(@(MyLayoutSize.fill)).multiply(percent).add(inc);
+        [[[self.view.widthSize myEqualTo:(@(MyLayoutSize.fill))] myMultiply:(percent)] myAdd:(inc)];
         return self;
     };
 }
 
 - (id<MyFlexItem> (^)(CGFloat))min_width {
     return ^id(CGFloat val) {
-        self.view.widthSize.min(val);
+        [self.view.widthSize myMin:(val)];
         return self;
     };
 }
 
 - (id<MyFlexItem> (^)(CGFloat))max_width {
     return ^id(CGFloat val) {
-        self.view.widthSize.max(val);
+        [self.view.widthSize myMax:(val)];
         return self;
     };
 }
@@ -275,9 +275,9 @@ const int MyFlex_Auto = -1;
 - (id<MyFlexItem> (^)(CGFloat))height {
     return ^id(CGFloat val) {
         if (val > 0 && val < 1) {
-            self.view.heightSize.equalTo(@(MyLayoutSize.fill)).multiply(val);
+            [[self.view.heightSize myEqualTo:(@(MyLayoutSize.fill))] myMultiply:(val)];
         } else {
-            self.view.heightSize.equalTo(@(val));
+            [self.view.heightSize myEqualTo:(@(val))];
         }
         return self;
     };
@@ -285,21 +285,21 @@ const int MyFlex_Auto = -1;
 
 - (id<MyFlexItem> (^)(CGFloat percent, CGFloat inc))height_percent {
     return ^id(CGFloat percent, CGFloat inc) {
-        self.view.heightSize.equalTo(@(MyLayoutSize.fill)).multiply(percent).add(inc);
+        [[[self.view.heightSize myEqualTo:(@(MyLayoutSize.fill))] myMultiply:(percent)] myAdd:(inc)];
         return self;
     };
 }
 
 - (id<MyFlexItem> (^)(CGFloat))min_height {
     return ^id(CGFloat val) {
-        self.view.heightSize.min(val);
+        [self.view.heightSize myMin:(val)];
         return self;
     };
 }
 
 - (id<MyFlexItem> (^)(CGFloat))max_height {
     return ^id(CGFloat val) {
-        self.view.heightSize.max(val);
+        [self.view.heightSize myMax:(val)];
         return self;
     };
 }

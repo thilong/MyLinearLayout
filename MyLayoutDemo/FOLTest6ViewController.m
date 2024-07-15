@@ -29,7 +29,7 @@
     MyLinearLayout *rootLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
     rootLayout.backgroundColor = [CFTool color:0];
     rootLayout.myHorzMargin = 0;
-    rootLayout.heightSize.lBound(scrollView.heightSize,0,1); //默认虽然高度包裹，但是最小的高度要和滚动视图相等。
+    [rootLayout.heightSize myLBound:scrollView.heightSize add:0 multi:1]; //默认虽然高度包裹，但是最小的高度要和滚动视图相等。
     rootLayout.subviewVSpace = 10;
     [scrollView addSubview:rootLayout];
     
@@ -95,7 +95,7 @@
     nameLabel.font = [CFTool font:17];
     nameLabel.textColor = [CFTool color:4];
     nameLabel.clearFloat = YES; //注意这里要另外起一行。
-    nameLabel.widthSize.equalTo(contentLayout.widthSize).add(-45); //40的头像宽度外加5的左右间距。
+    [[nameLabel.widthSize myEqualTo:(contentLayout.widthSize)] myAdd:(-45)]; //40的头像宽度外加5的左右间距。
     [nameLabel sizeToFit];
     [contentLayout addSubview:nameLabel];
     
@@ -111,8 +111,8 @@
     addressLabel.text = @"联系地址：中华人民共和国北京市朝阳区盈科中心B座2楼,其他的我就不会再告诉你了。";
     addressLabel.font = [CFTool font:15];
     addressLabel.textColor = [CFTool color:4];
-    addressLabel.heightSize.equalTo(@(MyLayoutSize.wrap));
-    addressLabel.widthSize.equalTo(contentLayout.widthSize).add(-45); //40的头像宽度外加5的左右间距。
+    [addressLabel.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
+    [[addressLabel.widthSize myEqualTo:(contentLayout.widthSize)] myAdd:(-45)]; //40的头像宽度外加5的左右间距。
     [addressLabel sizeToFit];
     [contentLayout addSubview:addressLabel];
     
@@ -127,7 +127,7 @@
     githublabel.text = @"github: https://github.com/youngsoft";
     githublabel.font = [CFTool font:15];
     githublabel.textColor = [CFTool color:9];
-    githublabel.widthSize.equalTo(contentLayout.widthSize).add(-45); //40的头像宽度外加5的左右间距。
+    [[githublabel.widthSize myEqualTo:(contentLayout.widthSize)] myAdd:(-45)]; //40的头像宽度外加5的左右间距。
     githublabel.adjustsFontSizeToFitWidth = YES;
     [githublabel sizeToFit];
     [contentLayout addSubview:githublabel];
@@ -136,7 +136,7 @@
     detailLabel.text = @"坚持原创，以造轮子为乐!";
     detailLabel.textColor = [CFTool color:2];
     detailLabel.font = [CFTool font:20];
-    detailLabel.widthSize.equalTo(contentLayout.widthSize).add(-45); //40的头像宽度外加5的左右间距。
+    [[detailLabel.widthSize myEqualTo:(contentLayout.widthSize)] myAdd:(-45)]; //40的头像宽度外加5的左右间距。
     detailLabel.adjustsFontSizeToFitWidth = YES;
     [detailLabel sizeToFit];
     [contentLayout addSubview:detailLabel];
@@ -159,7 +159,7 @@
     UIImageView *headImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"minions4"]];
     headImageView.contentMode = UIViewContentModeCenter;
     headImageView.weight = 1; //占据全部宽度。
-    headImageView.heightSize.equalTo(@80);
+    [headImageView.heightSize myEqualTo:(@80)];
     [contentLayout addSubview:headImageView];
 
     UILabel *nameLabel = [UILabel new];
@@ -193,7 +193,7 @@
     {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:images[i]]];
         imageView.contentMode = UIViewContentModeCenter;
-        imageView.heightSize.equalTo(@20);
+        [imageView.heightSize myEqualTo:(@20)];
         imageView.weight = 1.0/ (3 - i);  //这里三个，第一个占用全部的1/3，第二个占用剩余的1/2，第三个占用剩余的1/1。这样就实现了均分宽度的效果。
         [contentLayout addSubview:imageView];
     }
@@ -324,8 +324,8 @@
     editButton.textColor = [CFTool color:4];
     editButton.layer.cornerRadius = 5;
     editButton.layer.masksToBounds = YES;
-    editButton.widthSize.equalTo(@(MyLayoutSize.wrap)).add(20);
-    editButton.heightSize.equalTo(@(MyLayoutSize.wrap)).add(4);
+    [[editButton.widthSize myEqualTo:(@(MyLayoutSize.wrap))] myAdd:(20)];
+    [[editButton.heightSize myEqualTo:(@(MyLayoutSize.wrap))] myAdd:(4)];
     editButton.reverseFloat = YES;
     [contentLayout addSubview:editButton];
     

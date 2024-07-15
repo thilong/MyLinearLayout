@@ -35,8 +35,8 @@
     rootLayout.subviewVSpace = 10;
     rootLayout.padding = UIEdgeInsetsMake(5, 5, 5, 5);  //分别设置表格布局里面的行间距、列间距、内部padding边距。
     
-    rootLayout.widthSize.equalTo(scrollView.widthSize);
-    rootLayout.heightSize.equalTo(@(MyLayoutSize.wrap));//布局宽度和父视图一致，高度则由内容包裹。这是实现将布局视图加入滚动条视图并垂直滚动的标准方法。
+    [rootLayout.widthSize myEqualTo:(scrollView.widthSize)];
+    [rootLayout.heightSize myEqualTo:(@(MyLayoutSize.wrap))];//布局宽度和父视图一致，高度则由内容包裹。这是实现将布局视图加入滚动条视图并垂直滚动的标准方法。
     [scrollView addSubview:rootLayout];
     self.rootLayout = rootLayout;
     

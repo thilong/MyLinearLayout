@@ -33,13 +33,13 @@
     MyFlowLayout *rootLayout = [MyFlowLayout flowLayoutWithOrientation:MyOrientation_Vert arrangedCount:3];
     rootLayout.backgroundColor = [CFTool color:0];
     rootLayout.pagedCount = 9;
-    rootLayout.heightSize.equalTo(@(MyLayoutSize.wrap));  //上下滚动，每页9个。
+    [rootLayout.heightSize myEqualTo:(@(MyLayoutSize.wrap))];  //上下滚动，每页9个。
     rootLayout.subviewSpace = 10;
     rootLayout.padding = UIEdgeInsetsMake(10, 5, 10, 5);
-    rootLayout.leftPos.equalTo(@0).active = YES; //active属性用来表示是否让这个属性设置生效。
-    rootLayout.rightPos.equalTo(@0).active = YES;  //这里设置左右的边距是0并生效，表示宽度和父视图相等。
-    rootLayout.topPos.equalTo(@0).active = NO;
-    rootLayout.bottomPos.equalTo(@0).active = NO;  //这里设置上下边距是0但是不生效，这时候高度是不能生效的。
+    [rootLayout.leftPos myEqualTo:(@0)].active = YES; //active属性用来表示是否让这个属性设置生效。
+    [rootLayout.rightPos myEqualTo:(@0)].active = YES;  //这里设置左右的边距是0并生效，表示宽度和父视图相等。
+    [rootLayout.topPos myEqualTo:(@0)].active = NO;
+    [rootLayout.bottomPos myEqualTo:(@0)].active = NO;  //这里设置上下边距是0但是不生效，这时候高度是不能生效的。
     [scrollView addSubview:rootLayout];
     self.rootLayout = rootLayout;
     
@@ -91,8 +91,8 @@
     }
    
     //这里切换水平滚动还是垂直滚动。
-    self.rootLayout.heightSize.equalTo(self.rootLayout.heightSize.isWrap? nil : @(MyLayoutSize.wrap));
-    self.rootLayout.widthSize.equalTo(self.rootLayout.widthSize.isWrap? nil : @(MyLayoutSize.wrap));
+    [self.rootLayout.heightSize myEqualTo:(self.rootLayout.heightSize.isWrap? nil : @(MyLayoutSize.wrap))];
+    [self.rootLayout.widthSize myEqualTo:(self.rootLayout.widthSize.isWrap? nil : @(MyLayoutSize.wrap))];
     
     
     BOOL isHorzScroll = self.rootLayout.widthSize.isWrap;

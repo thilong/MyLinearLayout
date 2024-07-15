@@ -33,12 +33,12 @@
     self = [super init];
     if (self != nil)
     {
-        self.widthSize.equalTo(@(MyLayoutSize.wrap));
-        self.heightSize.equalTo(@(MyLayoutSize.wrap));
+        [self.widthSize myEqualTo:(@(MyLayoutSize.wrap))];
+        [self.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
         
         _circleView = [MyPathLayout new];  //这里这是为路径布局的原因是其中的numLabel是跟随园所在的位置而确定的。
-        _circleView.widthSize.equalTo(@60);
-        _circleView.heightSize.equalTo(@60);
+        [_circleView.widthSize myEqualTo:(@60)];
+        [_circleView.heightSize myEqualTo:(@60)];
         _circleView.layer.cornerRadius = 30;
         _circleView.backgroundColor = [CFTool color:2];
         _circleView.coordinateSetting.origin = CGPointMake(0.5, 0.5);
@@ -51,8 +51,8 @@
 
         
         UILabel *numLabel = [UILabel new];
-        numLabel.widthSize.equalTo(@15);
-        numLabel.heightSize.equalTo(@15);
+        [numLabel.widthSize myEqualTo:(@15)];
+        [numLabel.heightSize myEqualTo:(@15)];
         numLabel.layer.cornerRadius = 7.5;
         numLabel.backgroundColor = [UIColor whiteColor];
         numLabel.font = [CFTool font:12];
@@ -67,8 +67,8 @@
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:image]];
         [imageView sizeToFit];
         
-        imageView.centerXPos.equalTo(_circleView.centerXPos);
-        imageView.centerYPos.equalTo(_circleView.centerYPos);
+        [imageView.centerXPos myEqualTo:(_circleView.centerXPos)];
+        [imageView.centerYPos myEqualTo:(_circleView.centerYPos)];
         [self addSubview:imageView];
         
         
@@ -77,8 +77,8 @@
         titleLabel.textColor = [CFTool color:4];
         titleLabel.font = [CFTool font:15];
         [titleLabel sizeToFit];
-        titleLabel.centerXPos.equalTo(_circleView.centerXPos);
-        titleLabel.topPos.equalTo(_circleView.bottomPos).offset(10);
+        [titleLabel.centerXPos myEqualTo:(_circleView.centerXPos)];
+        [[titleLabel.topPos myEqualTo:(_circleView.bottomPos)] myOffset:(10)];
         [self addSubview:titleLabel];
         
         
@@ -129,9 +129,9 @@
     centerButton.titleLabel.font = [CFTool font:20];
     centerButton.layer.borderWidth = 5;
     centerButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    centerButton.widthSize.equalTo(@[_pathLayout.widthSize, _pathLayout.heightSize].myMinSize).multiply(0.5).add(-30);
+    [[[centerButton.widthSize myEqualTo:(@[_pathLayout.widthSize, _pathLayout.heightSize].myMinSize)] myMultiply:(0.5)] myAdd:(-30)];
     //宽度是父视图宽度或者高度最小者的一半再减去30
-    centerButton.heightSize.equalTo(centerButton.widthSize);  //高度等于宽度。
+    [centerButton.heightSize myEqualTo:(centerButton.widthSize)];  //高度等于宽度。
     centerButton.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
     { //viewLayoutCompleteBlock是在1.2.3中添加的新功能，目的是给完成了布局的子视图一个机会进行一些特殊的处理，viewLayoutCompleteBlock只会在子视图布局完成后调用一次.其中的sbv就是子视图自己，而layout则是父布局视图。因为这个block是完成布局后执行的。所以这时候子视图的frame值已经被计算出来，因此您可以在这里设置一些和frame关联的属性。
       

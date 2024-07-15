@@ -37,9 +37,9 @@
    
     
     MyTableLayout *tableLayout = [MyTableLayout tableLayoutWithOrientation:MyOrientation_Vert];
-    tableLayout.leadingPos.equalTo(@(MyLayoutPos.safeAreaMargin)).offset(10);
-    tableLayout.trailingPos.equalTo(@(MyLayoutPos.safeAreaMargin)).offset(10);
-    tableLayout.topPos.equalTo(@(MyLayoutPos.safeAreaMargin)).offset(10);
+    [[tableLayout.leadingPos myEqualTo:(@(MyLayoutPos.safeAreaMargin))] myOffset:(10)];
+    [[tableLayout.trailingPos myEqualTo:(@(MyLayoutPos.safeAreaMargin))] myOffset:(10)];
+    [[tableLayout.topPos myEqualTo:(@(MyLayoutPos.safeAreaMargin))] myOffset:(10)];
     tableLayout.boundBorderline = [[MyBorderline alloc] initWithColor:[UIColor blackColor] thick:3];
     tableLayout.intelligentBorderline = [[MyBorderline alloc] initWithColor:[UIColor lightGrayColor]];
     [self.view addSubview:tableLayout];

@@ -113,7 +113,7 @@
     passwordLabel.text = @"Password:";
     passwordLabel.textColor = [CFTool color:4];
     passwordLabel.font = [CFTool font:15];
-    passwordLabel.widthSize.lBound(userNameLabel.widthSize,0,1);  //注意这里，因为"password"的长度要小于"User name",所以我们这里设定passwordLabel的最小宽度要和userNameLabel相等。这样目的是为了让后面的输入框具有左对齐的效果。
+    [passwordLabel.widthSize myLBound:userNameLabel.widthSize add:0 multi:1];  //注意这里，因为"password"的长度要小于"User name",所以我们这里设定passwordLabel的最小宽度要和userNameLabel相等。这样目的是为了让后面的输入框具有左对齐的效果。
     passwordLabel.myTop = 20;  //距离上行的顶部间距为20
     [passwordLabel sizeToFit];
     [flowLayout addSubview:passwordLabel];
@@ -160,7 +160,7 @@
     submitButton.layer.borderWidth = 0.5;
     submitButton.myTop = 20;
     submitButton.myHeight = 44;
-    submitButton.widthSize.equalTo(flowLayout.widthSize).add(-40);  //宽度等于父视图的宽度再减去40。
+    [[submitButton.widthSize myEqualTo:(flowLayout.widthSize)] myAdd:(-40)];  //宽度等于父视图的宽度再减去40。
     [flowLayout addSubview:submitButton];
     
     //第六行因为最后只有一个按钮，所以这里不需要建立占位视图。
@@ -226,7 +226,7 @@
         imageView.myLeading = 10;
         imageView.myTrailing = 10;
         imageView.myTop = 10;
-        imageView.widthSize.equalTo(imageView.heightSize);   //宽度等于高度，对于水平流式布局来说，子视图的宽度可以等于高度，反之不可以；而对于垂直流式布局来说则高度可以等于宽度，反之则不可以。
+        [imageView.widthSize myEqualTo:(imageView.heightSize)];   //宽度等于高度，对于水平流式布局来说，子视图的宽度可以等于高度，反之不可以；而对于垂直流式布局来说则高度可以等于宽度，反之则不可以。
         if (i % flowLayout.arrangedCount == 0)
         {
             imageView.myTop = 60;   //每列的第一个增加缩进量。。
@@ -287,7 +287,7 @@
     v4.adjustsFontSizeToFitWidth = YES;
     v4.backgroundColor = [CFTool color:5];
     v4.weight = 1/3.0;
-    v4.widthSize.add(-20);  //因为要均分为3部分，而我们设置了水平间距subviewHSpace为10.所以我们这里要减去20。也就是减去2个间隔。
+    [v4.widthSize myAdd:(-20)];  //因为要均分为3部分，而我们设置了水平间距subviewHSpace为10.所以我们这里要减去20。也就是减去2个间隔。
     v4.myHeight = 50;
     [flowLayout addSubview:v4];
     
@@ -297,7 +297,7 @@
     v5.adjustsFontSizeToFitWidth = YES;
     v5.backgroundColor = [CFTool color:6];
     v5.weight = 1/2.0;
-    v5.widthSize.add(-10); //因为剩下的要均分为2部分，而我们设置了水平间距subviewHSpace为10.所以我们这里要减去10。也就是减去1个间隔。
+    [v5.widthSize myAdd:(-10)]; //因为剩下的要均分为2部分，而我们设置了水平间距subviewHSpace为10.所以我们这里要减去10。也就是减去1个间隔。
     v5.myHeight = 50;
     [flowLayout addSubview:v5];
     

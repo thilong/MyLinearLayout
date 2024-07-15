@@ -132,14 +132,14 @@
 {
     MyRelativeLayout *headerLayout = [MyRelativeLayout new];
     headerLayout.backgroundImage = [UIImage imageNamed:@"bk1"];  //可以为布局直接设备背景图片。
-    headerLayout.heightSize.equalTo(@(MyLayoutSize.wrap));
+    [headerLayout.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     [contentLayout addSubview:headerLayout];
     
     UIImageView *headerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"head2"]];
     headerImageView.layer.cornerRadius = headerImageView.estimatedRect.size.height / 2; //
     headerImageView.backgroundColor = [UIColor whiteColor];
-    headerImageView.centerXPos.equalTo(@0);
-    headerImageView.centerYPos.equalTo(@0);  //在父视图中居中。
+    [headerImageView.centerXPos myEqualTo:(@0)];
+    [headerImageView.centerYPos myEqualTo:(@0)];  //在父视图中居中。
     [headerLayout addSubview:headerImageView];
     
     UILabel *headerNameLabel = [UILabel new];
@@ -147,8 +147,8 @@
     headerNameLabel.font = [CFTool font:17];
     headerNameLabel.textColor = [CFTool color:4];
     [headerNameLabel sizeToFit];
-    headerNameLabel.centerXPos.equalTo(@0);
-    headerNameLabel.topPos.equalTo(headerImageView.bottomPos).offset(10);
+    [headerNameLabel.centerXPos myEqualTo:(@0)];
+    [[headerNameLabel.topPos myEqualTo:(headerImageView.bottomPos)] myOffset:(10)];
     [headerLayout addSubview:headerNameLabel];
     
     
@@ -277,8 +277,8 @@
     leftLabel.textColor = [UIColor whiteColor];
     leftLabel.backgroundColor = [CFTool color:5];
     leftLabel.font = [CFTool font:14];
-    leftLabel.trailingPos.equalTo(@0.5).min(0); //右边浮动间距为0.5,最小为0
-    leftLabel.widthSize.equalTo(@(MyLayoutSize.wrap));
+    [[leftLabel.trailingPos myEqualTo:(@0.5)] myMin:(0)]; //右边浮动间距为0.5,最小为0
+    [leftLabel.widthSize myEqualTo:(@(MyLayoutSize.wrap))];
     [testLayout addSubview:leftLabel];
     self.leftFlexedLabel = leftLabel;
     
@@ -288,8 +288,8 @@
     rightLabel.textColor = [UIColor whiteColor];
     rightLabel.backgroundColor = [CFTool color:6];
     rightLabel.font = [CFTool font:14];
-    rightLabel.leadingPos.equalTo(@0.5).min(0);   //左边浮动间距为0.5，最小为0
-    rightLabel.widthSize.equalTo(@(MyLayoutSize.wrap)); //宽度由内容包裹
+    [[rightLabel.leadingPos myEqualTo:(@0.5)] myMin:(0)];   //左边浮动间距为0.5，最小为0
+    [rightLabel.widthSize myEqualTo:(@(MyLayoutSize.wrap))]; //宽度由内容包裹
     [testLayout addSubview:rightLabel];
     self.rightFlexedLabel = rightLabel;
     
@@ -312,7 +312,7 @@
     testLayout.padding = UIEdgeInsetsMake(10, 10, 10, 10);
     testLayout.subviewHSpace = 10;
     testLayout.subviewVSpace = 10;
-    testLayout.heightSize.equalTo(@50);
+    [testLayout.heightSize myEqualTo:(@50)];
     testLayout.clipsToBounds = YES;
     [contentLayout addSubview:testLayout];
     self.shrinkLayout = testLayout;
@@ -347,11 +347,11 @@
     UIButton *testButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [testButton setTitle:@"Click me" forState:UIControlStateNormal];
     testButton.backgroundColor = [CFTool color:0];
-    testButton.heightSize.equalTo(@50);
+    [testButton.heightSize myEqualTo:(@50)];
    // testButton.widthSize.equalTo(testButton.widthSize).add(20);
-    testButton.widthSize.equalTo(@(MyLayoutSize.wrap)).add(20);
-    testButton.leadingPos.equalTo(@10).active = YES;  //左边边距是10，设置active为YES表示左边位置对象的设置是生效的。
-    testButton.trailingPos.equalTo(@10).active = NO;  //右边边距是10，设置active为NO表示右边位置对象的设置是不生效的。
+    [[testButton.widthSize myEqualTo:(@(MyLayoutSize.wrap))] myAdd:(20)];
+    [testButton.leadingPos myEqualTo:(@10)].active = YES;  //左边边距是10，设置active为YES表示左边位置对象的设置是生效的。
+    [testButton.trailingPos myEqualTo:(@10)].active = NO;  //右边边距是10，设置active为NO表示右边位置对象的设置是不生效的。
     
     [testButton addTarget:self action:@selector(handleActiveTest:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -369,8 +369,8 @@
     //左右内边距都是10，不包裹子视图，整体高度为50，里面的子布局垂直居中对齐。
     actionLayout.paddingLeft = 10;
     actionLayout.paddingRight = 10;
-    actionLayout.widthSize.equalTo(nil);
-    actionLayout.heightSize.equalTo(@50);
+    [actionLayout.widthSize myEqualTo:(nil)];
+    [actionLayout.heightSize myEqualTo:(@50)];
     actionLayout.gravity = MyGravity_Vert_Center;
     
     
@@ -381,12 +381,12 @@
     label.adjustsFontSizeToFitWidth = YES;
     [label sizeToFit];
     label.tag = 1000;
-    label.trailingPos.equalTo(@0.5);  //水平线性布局通过相对间距来实现左右分开排列。
+    [label.trailingPos myEqualTo:(@0.5)];  //水平线性布局通过相对间距来实现左右分开排列。
     [actionLayout addSubview:label];
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"next"]];
     [imageView sizeToFit];
-    imageView.leadingPos.equalTo(@0.5);
+    [imageView.leadingPos myEqualTo:(@0.5)];
     [actionLayout addSubview:imageView];
     
     return actionLayout;
@@ -402,8 +402,8 @@
     //左右边距都是10，不包裹子视图，整体高度为50，里面的子布局垂直居中对齐。
     switchLayout.paddingLeft = 10;
     switchLayout.paddingRight = 10;
-    switchLayout.widthSize.equalTo(nil);
-    switchLayout.heightSize.equalTo(@50);
+    [switchLayout.widthSize myEqualTo:(nil)];
+    [switchLayout.heightSize myEqualTo:(@50)];
     switchLayout.gravity = MyGravity_Vert_Center;
     
     
@@ -420,7 +420,7 @@
     
     UISwitch *switchCtrl = [UISwitch new];
     [switchCtrl addTarget:self action:action forControlEvents:UIControlEventValueChanged];
-    switchCtrl.trailingPos.min(5);
+    [switchCtrl.trailingPos myMin:(5)];
     [switchLayout addSubview:switchCtrl];
     
     return switchLayout;
@@ -435,7 +435,7 @@
     //左右边距都是10，不包裹子视图，整体高度为50，里面的子布局垂直居中对齐。
     segmentedLayout.paddingLeft = 10;
     segmentedLayout.paddingRight = 10;
-    segmentedLayout.heightSize.equalTo(@50);
+    [segmentedLayout.heightSize myEqualTo:(@50)];
     segmentedLayout.gravity = MyGravity_Vert_Center;
     
     //向左浮动
@@ -540,9 +540,9 @@
 -(void)handleShrinkSwitch:(UISwitch *)sender
 {
     if (sender.isOn)
-        self.shrinkLayout.heightSize.equalTo(@(MyLayoutSize.wrap));
+        [self.shrinkLayout.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     else
-        self.shrinkLayout.heightSize.equalTo(@50);
+        [self.shrinkLayout.heightSize myEqualTo:(@50)];
     
     [self.shrinkLayout layoutAnimationWithDuration:0.3];
 }
@@ -618,7 +618,7 @@
     
     //评估出itemLayout的尺寸，注意这里要明确指定itemLayout的宽度，因为弹出菜单的宽度是sender的宽度-20，而itemLayout的父容器又有20的左右内边距，因此这里要减去40.
     CGSize sz = [itemLayout sizeThatFits:CGSizeMake(CGRectGetWidth(rc) - 40, 0)];
-    scrollView.heightSize.equalTo(@(sz.height)).min(50).max(155);  //设置scrollView的高度，以及最大最小高度。正是这个实现了拉伸限制功能。
+    [[[scrollView.heightSize myEqualTo:(@(sz.height))] myMin:(50)] myMax:(155)];  //设置scrollView的高度，以及最大最小高度。正是这个实现了拉伸限制功能。
     
     UIButton *closeButton = [UIButton new];
     closeButton.layer.borderColor = [UIColor darkGrayColor].CGColor;
@@ -666,7 +666,7 @@
     
     //重新评估popmenuItemLayout的高度，这里宽度是0的原因是因为宽度已经明确了，也就是在现有的宽度下评估。而前面是因为popmenuItemLayout的宽度还没有明确所以要指定宽度。
     CGSize sz = [self.popmenuItemLayout sizeThatFits:CGSizeMake(0, 0)];
-    self.popmenuScrollView.heightSize.equalTo(@(sz.height));
+    [self.popmenuScrollView.heightSize myEqualTo:(@(sz.height))];
     
     //多个布局同时动画。
     [self.popmenuItemLayout layoutAnimationWithDuration:0.3];
@@ -679,7 +679,7 @@
 {
     [sender removeFromSuperview];
     CGSize sz = [self.popmenuItemLayout sizeThatFits:CGSizeMake(0, 0)];
-    self.popmenuScrollView.heightSize.equalTo(@(sz.height));
+    [self.popmenuScrollView.heightSize myEqualTo:(@(sz.height))];
 
     [self.popmenuItemLayout layoutAnimationWithDuration:0.3];
     [self.popmenuLayout layoutAnimationWithDuration:0.3];

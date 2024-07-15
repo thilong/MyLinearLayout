@@ -77,7 +77,7 @@
     
     UILabel *v1 = [self createLabel:NSLocalizedString(@"width equal to superview, height equal to 20% of free height of superview", @"") backgroundColor:[CFTool color:5]];
     v1.numberOfLines = 3;
-    v1.topPos.equalTo(self.topLayoutGuide).offset(10);
+    [[v1.topPos myEqualTo:(self.topLayoutGuide)] myOffset:(10)];
     v1.myLeading = v1.myTrailing = 0; //宽度和父视图相等,等价于v1.widthSize.equalTo(rootLayout.widthSize);
     v1.weight = 0.2;     //高度的比重是剩余空间的20%
     [rootLayout addSubview:v1];
@@ -86,7 +86,7 @@
     UILabel *v2 = [self createLabel:NSLocalizedString(@"width equal to 80% of superview, height equal to 30% of free height of superview", @"") backgroundColor:[CFTool color:6]];
     v2.numberOfLines = 2;
     v2.myTop = 10;
-    v2.widthSize.equalTo(rootLayout.widthSize).multiply(0.8);  //子视图的宽度是父视图宽度的0.8
+    [[v2.widthSize myEqualTo:(rootLayout.widthSize)] myMultiply:(0.8)];  //子视图的宽度是父视图宽度的0.8
     v2.myCenterX = 0;
     v2.weight = 0.3;    //高度的比重是剩余空间的30%
     [rootLayout addSubview:v2];
@@ -95,7 +95,7 @@
     UILabel *v3 = [self createLabel:NSLocalizedString(@"width equal to superview - 20, height equal to 50% of free height of superview", @"") backgroundColor:[CFTool color:7]];
     v3.numberOfLines = 0;
     v3.myTop = 10;
-    v3.widthSize.equalTo(rootLayout.widthSize).add(-20);  //父视图的宽度-20, v3.myTrailing = 0;
+    [[v3.widthSize myEqualTo:(rootLayout.widthSize)] myAdd:(-20)];  //父视图的宽度-20, v3.myTrailing = 0;
     v3.myTrailing = 0;
     v3.weight = 0.5;  //高度的比重是剩余空间的50%
     [rootLayout addSubview:v3];

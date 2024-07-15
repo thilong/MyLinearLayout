@@ -112,18 +112,6 @@
  */
 @property (class, nonatomic, assign, readonly) CGFloat safeAreaMargin;
 
-//because masonry defined macro MAS_SHORTHAND_GLOBALS. the equalTo, offset may conflict with below method. so
-//if you used MyLayout and Masonry concurrently and you defined MAS_SHORTHAND_GLOBALS in masonry, then you can define MY_USEPREFIXMETHOD to solve the conflict.
-#ifdef MY_USEPREFIXMETHOD
-- (MyLayoutPos * (^)(id val))myEqualTo;
-- (MyLayoutPos * (^)(CGFloat val))myOffset;
-- (MyLayoutPos * (^)(CGFloat val))myMin;
-- (MyLayoutPos * (^)(id posVal, CGFloat offset))myLBound;
-- (MyLayoutPos * (^)(CGFloat val))myMax;
-- (MyLayoutPos * (^)(id posVal, CGFloat offset))myUBound;
-- (void)myClear;
-
-#else
 
 /**
  设置布局位置的值。参数val可以接收下面七种类型的值：
@@ -143,7 +131,7 @@
  
  7. nil表示位置的值被清除。
  */
-- (MyLayoutPos * (^)(id val))equalTo;
+- (MyLayoutPos *)myEqualTo:(id)value;
 
 /**
  设置布局位置值的偏移量。 所谓偏移量是指布局位置在设置了某种值后增加或减少的偏移值。
@@ -163,12 +151,12 @@
  2.比如：A.rightPos.equalTo(B.rightPos).offset(5)表示A视图的右边位置等于B视图的右边位置再往左偏移5。
  @endcode
  */
-- (MyLayoutPos * (^)(CGFloat val))offset;
+- (MyLayoutPos *)myOffset:(CGFloat)value;
 
 /**
  *设置位置的最小边界数值，min方法是lBound方法的简化版本。比如：A.min(10) <==>  A.lBound(@10, 0)
  */
-- (MyLayoutPos * (^)(CGFloat val))min;
+- (MyLayoutPos *)myMin:(CGFloat)value;
 
 /**
  *设置布局位置的最小边界值。 如果位置对象没有设置最小边界值，那么最小边界默认就是无穷小-CGFLOAT_MAX。lBound方法除了能设置为NSNumber外，还可以设置为MyLayoutPos值，并且还可以指定最小位置的偏移量值。只有在相对布局中的子视图的位置对象才能设置最小边界值为MyLayoutPos类型的值，其他类型布局中的子视图只支持NSNumber类型的最小边界值。
@@ -187,12 +175,12 @@
  A.leftPos.lBound(B.rightPos, 20); //这时A是不必要指定明确的宽度的。
  @endcode
  */
-- (MyLayoutPos * (^)(id posVal, CGFloat offsetVal))lBound;
+- (MyLayoutPos *)myLBound:(id)posValue offset:(CGFloat)offset;
 
 /**
  *设置位置的最大边界数值，max方法是uBound方法的简化版本。比如：A.max(10) <==>  A.uBound(@10, 0)
  */
-- (MyLayoutPos * (^)(CGFloat val))max;
+- (MyLayoutPos *)myMax:(CGFloat)value;
 
 /**
  设置布局位置的最大边界值。 如果位置对象没有设置最大边界值，那么最大边界默认就是无穷大CGFLOAT_MAX。uBound方法除了能设置为NSNumber外，还可以设置为MyLayoutPos值，并且还可以指定最大位置的偏移量值。只有在相对布局中的子视图的位置对象才能设置最大边界值为MyLayoutPos类型的值，其他类型布局中的子视图只支持NSNumber类型的最大边界值。
@@ -215,13 +203,12 @@
  
  offsetVal 指定位置边界值的偏移量。
  */
-- (MyLayoutPos * (^)(id posVal, CGFloat offsetVal))uBound;
+- (MyLayoutPos *)myUBound:(id)posValue offset:(CGFloat)offset;
+
 /**
  *清除所有设置的约束值，这样位置对象将不会再生效了。
  */
-- (void)clear;
-
-#endif
+- (void)myClear;
 
 /**
  *设置布局位置是否是活动的,默认是YES表示活动的，如果设置为NO则表示这个布局位置对象设置的约束值将不会起作用。
@@ -245,7 +232,7 @@
 @interface MyLayoutPos (Clone)
 
 //从布局位置中克隆出一个位置对象来。这个克隆出来的位置值是源位置对象的值加上offsetVal。这个方法通常用于下面数组元素的构造
-- (MyLayoutPos * (^)(CGFloat offsetVal))clone;
+- (MyLayoutPos *)myClone:(CGFloat)offsetVal;
 
 @end
 

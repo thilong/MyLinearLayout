@@ -64,37 +64,37 @@
     //某个视图的水平居中依赖另外一个视图，另外一个视图隐藏。
     UIView *v2 = [UIView new];
     v2.mySize = CGSizeMake(100, 100);
-    v2.centerXPos.equalTo(v1.centerXPos).offset(20);
-    v2.centerYPos.equalTo(v1.centerYPos).offset(20);
+    [[v2.centerXPos myEqualTo:(v1.centerXPos)] myOffset:(20)];
+    [[v2.centerYPos myEqualTo:(v1.centerYPos)] myOffset:(20)];
     [rootLayout addSubview:v2];
     
     //某个视图的左边依赖另外一个视图，另外一个视图隐藏。
     UIView *v3 = [UIView new];
     v3.mySize = CGSizeMake(100, 100);
-    v3.leadingPos.equalTo(v1.leadingPos).offset(20);
-    v3.bottomPos.equalTo(v1.bottomPos).offset(20);
+    [[v3.leadingPos myEqualTo:(v1.leadingPos)] myOffset:(20)];
+    [[v3.bottomPos myEqualTo:(v1.bottomPos)] myOffset:(20)];
     [rootLayout addSubview:v3];
 
     UIView *v4 = [UIView new];
     v4.mySize = CGSizeMake(100, 100);
-    v4.leadingPos.lBound(v3.leadingPos, 0);
-    v4.trailingPos.uBound(rootLayout.trailingPos,0);
-    v4.bottomPos.equalTo(@(10));
+    [v4.leadingPos myLBound:v3.leadingPos offset:0];
+    [v4.trailingPos myUBound:rootLayout.trailingPos offset:0];
+    [v4.bottomPos myEqualTo:(@(10))];
     [rootLayout addSubview:v4];
 
     UIView *v5 = [UIView new];
     v5.mySize = CGSizeMake(100, 100);
-    v5.baselinePos.equalTo(v4.baselinePos).offset(20);
+    [[v5.baselinePos myEqualTo:(v4.baselinePos)] myOffset:(20)];
     [rootLayout addSubview:v5];
     
     UILabel *v6 = [UILabel new];
     v6.mySize = CGSizeMake(100, 100);
-    v6.baselinePos.equalTo(v1.baselinePos).offset(20);
+    [[v6.baselinePos myEqualTo:(v1.baselinePos)] myOffset:(20)];
     [rootLayout addSubview:v6];
 
     UILabel *v7 = [UILabel new];
     v7.mySize = CGSizeMake(100, 100);
-    v7.baselinePos.equalTo(@(40));
+    [v7.baselinePos myEqualTo:(@(40))];
     [rootLayout addSubview:v7];
     
 }
@@ -110,14 +110,14 @@
     scrollview.backgroundColor = [UIColor blueColor];
     scrollview.myHorzMargin = 0;
     scrollview.wrapContentHeight = YES;
-    scrollview.heightSize.max(400).min(280);
+    [[scrollview.heightSize myMax:(400)] myMin:(280)];
     [rootLayout addSubview:scrollview];
     
     // 内容C视图
     MyLinearLayout * backLinear = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
     backLinear.backgroundColor = [UIColor greenColor];
     backLinear.myHorzMargin = 0;
-    backLinear.heightSize.min(280);
+    [backLinear.heightSize myMin:(280)];
     backLinear.gravity = MyGravity_Vert_Bottom;
     [scrollview addSubview:backLinear];
     
@@ -185,7 +185,7 @@
 {
     MyRelativeLayout *_rootLayout = [MyRelativeLayout new];
     
-    _rootLayout.widthSize.equalTo(self.view.widthSize);
+    [_rootLayout.widthSize myEqualTo:(self.view.widthSize)];
     _rootLayout.wrapContentHeight = YES;
     _rootLayout.paddingTop = 15;
     _rootLayout.paddingBottom = 15;
@@ -214,10 +214,10 @@
     
     UIButton *checkMarkBtn = [UIButton new];
     [checkMarkBtn setImage:[UIImage imageNamed:@"train_progresscomplete"] forState:(UIControlStateNormal)];
-    checkMarkBtn.widthSize.equalTo(@(13));
-    checkMarkBtn.heightSize.equalTo(@(13));
-    checkMarkBtn.rightPos.equalTo(@(10));
-    checkMarkBtn.centerYPos.equalTo(@(0));
+    [checkMarkBtn.widthSize myEqualTo:(@(13))];
+    [checkMarkBtn.heightSize myEqualTo:(@(13))];
+    [checkMarkBtn.rightPos myEqualTo:(@(10))];
+    [checkMarkBtn.centerYPos myEqualTo:(@(0))];
     [_rootLayout addSubview:checkMarkBtn];
         
     UILabel *contentLabel = [UILabel new];
@@ -239,8 +239,8 @@
     rootLayout.padding = UIEdgeInsetsMake(12, 12, 12, 12);
     
     MyLinearLayout *headerLayout = [MyLinearLayout linearLayoutWithOrientation:(MyOrientation_Horz)];
-    headerLayout.topPos.equalTo(rootLayout.topPos);
-    headerLayout.leftPos.equalTo(rootLayout.leftPos);
+    [headerLayout.topPos myEqualTo:(rootLayout.topPos)];
+    [headerLayout.leftPos myEqualTo:(rootLayout.leftPos)];
     headerLayout.wrapContentHeight = YES;
     [rootLayout addSubview:headerLayout];
     
@@ -258,16 +258,16 @@
     UILabel *titleLabel = [UILabel new];
     titleLabel.text = @"大师傅阿萨德阿斯蒂芬阿斯蒂芬";
     titleLabel.myHeight = MyLayoutSize.wrap;
-    titleLabel.leftPos.equalTo(headerLayout.leftPos).offset(32 + 5);
-    titleLabel.topPos.equalTo(headerLayout.bottomPos).offset(5);
-    titleLabel.rightPos.equalTo(rootLayout.rightPos);
+    [[titleLabel.leftPos myEqualTo:(headerLayout.leftPos)] myOffset:(32 + 5)];
+    [[titleLabel.topPos myEqualTo:(headerLayout.bottomPos)] myOffset:(5)];
+    [titleLabel.rightPos myEqualTo:(rootLayout.rightPos)];
     [rootLayout addSubview:titleLabel];
     
     MyLinearLayout *barView = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Horz];
     barView.myHeight = 20;
-    barView.leftPos.equalTo(titleLabel.leftPos);
-    barView.rightPos.equalTo(rootLayout.rightPos);
-    barView.topPos.equalTo(titleLabel.bottomPos);
+    [barView.leftPos myEqualTo:(titleLabel.leftPos)];
+    [barView.rightPos myEqualTo:(rootLayout.rightPos)];
+    [barView.topPos myEqualTo:(titleLabel.bottomPos)];
     [rootLayout addSubview:barView];
     
     [self.view addSubview:rootLayout];

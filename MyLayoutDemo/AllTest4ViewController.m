@@ -57,8 +57,8 @@ static NSInteger sBaseTag = 100000;
     _rootLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
     _rootLayout.gravity = MyGravity_Horz_Fill;  //设置垂直线性布局的水平填充值表明布局视图里面的所有子视图的宽度都和布局视图相等。
     
-    _rootLayout.widthSize.equalTo(scrollView.widthSize);
-    _rootLayout.heightSize.equalTo(@(MyLayoutSize.wrap)); //布局宽度和父视图一致，高度则由内容包裹。这是实现将布局视图加入滚动条视图并垂直滚动的标准方法。
+    [_rootLayout.widthSize myEqualTo:(scrollView.widthSize)];
+    [_rootLayout.heightSize myEqualTo:(@(MyLayoutSize.wrap))]; //布局宽度和父视图一致，高度则由内容包裹。这是实现将布局视图加入滚动条视图并垂直滚动的标准方法。
     [scrollView addSubview:_rootLayout];
     
     self.containerLayouts = [NSMutableArray new];
@@ -109,8 +109,8 @@ static NSInteger sBaseTag = 100000;
     supplementaryLayout.backgroundColor = [UIColor whiteColor];
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"next"]];
-    imageView.centerYPos.equalTo(supplementaryLayout.centerYPos);  //垂直居中
-    imageView.trailingPos.equalTo(supplementaryLayout.trailingPos);      //和父视图右对齐。
+    [imageView.centerYPos myEqualTo:supplementaryLayout.centerYPos];  //垂直居中
+    [imageView.trailingPos myEqualTo:supplementaryLayout.trailingPos];      //和父视图右对齐。
     [supplementaryLayout addSubview:imageView];
         
     UILabel *sectionTitleLabel = [UILabel new];
@@ -120,9 +120,9 @@ static NSInteger sBaseTag = 100000;
     sectionTitleLabel.font = [CFTool font:17];
     sectionTitleLabel.minimumScaleFactor = 0.7;
     sectionTitleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-    sectionTitleLabel.centerYPos.equalTo(supplementaryLayout.centerYPos);  //垂直居中
-    sectionTitleLabel.leadingPos.equalTo(supplementaryLayout.leadingPos);        //左边和父视图左对齐
-    sectionTitleLabel.trailingPos.equalTo(imageView.leadingPos);                 //右边是图标的左边。
+    [sectionTitleLabel.centerYPos myEqualTo:(supplementaryLayout.centerYPos)];  //垂直居中
+    [sectionTitleLabel.leadingPos myEqualTo:(supplementaryLayout.leadingPos)];        //左边和父视图左对齐
+    [sectionTitleLabel.trailingPos myEqualTo:(imageView.leadingPos)];                 //右边是图标的左边。
     [sectionTitleLabel sizeToFit];
     [supplementaryLayout addSubview:sectionTitleLabel];
     
@@ -134,7 +134,7 @@ static NSInteger sBaseTag = 100000;
 -(MyFlowLayout*)createCellContainerLayout:(NSInteger)arrangedCount
 {
     MyFlowLayout *containerLayout = [MyFlowLayout flowLayoutWithOrientation:MyOrientation_Vert arrangedCount:arrangedCount];
-    containerLayout.heightSize.equalTo(@(MyLayoutSize.wrap));
+    [containerLayout.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     containerLayout.gravity = MyGravity_Horz_Fill; //平均分配里面每个子视图的宽度或者拉伸子视图的宽度以便填充满整个布局。
     containerLayout.subviewHSpace = 5;
     containerLayout.subviewVSpace = 5;

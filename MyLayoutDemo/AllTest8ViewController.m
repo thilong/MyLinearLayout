@@ -117,8 +117,8 @@
         buttonTag.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
         buttonTag.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;  //按钮内容左上角对齐。
         buttonTag.backgroundColor = [CFTool color:i + 5];
-        buttonTag.widthSize.equalTo(floatLayout.widthSize).multiply(0.5).add(-5); //因为宽度都是父视图的一半，并且水平间距是10，所以这里比例是0.5，分别减去5个间距宽度。
-        buttonTag.heightSize.equalTo(floatLayout.heightSize).multiply(heightscale[i]).add(heightinc[i]); //高度占比和所减的间距在上面数组里面定义。
+        [[[buttonTag.widthSize myEqualTo:(floatLayout.widthSize)] myMultiply:(0.5)] myAdd:(-5)]; //因为宽度都是父视图的一半，并且水平间距是10，所以这里比例是0.5，分别减去5个间距宽度。
+        [[[buttonTag.heightSize myEqualTo:(floatLayout.heightSize)] myMultiply:(heightscale[i])] myAdd:(heightinc[i])]; //高度占比和所减的间距在上面数组里面定义。
         [floatLayout addSubview:buttonTag];
     }
     

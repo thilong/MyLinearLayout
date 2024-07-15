@@ -24,13 +24,13 @@
     if (self != nil)
     {
         MyFrameLayout *rootLayout = [MyFrameLayout new];
-        rootLayout.widthSize.equalTo(self.contentView.widthSize);
-        rootLayout.heightSize.equalTo(self.contentView.heightSize);
+        [rootLayout.widthSize myEqualTo:(self.contentView.widthSize)];
+        [rootLayout.heightSize myEqualTo:(self.contentView.heightSize)];
         [self.contentView addSubview:rootLayout];
         
         MyFrameLayout *leftItemLayout = [self createItemLayout:NSLocalizedString(@"Show", @"") withTag:0];
-        leftItemLayout.widthSize.equalTo(rootLayout.widthSize).multiply(1/3.0);
-        leftItemLayout.heightSize.equalTo(rootLayout.heightSize);
+        [[leftItemLayout.widthSize myEqualTo:(rootLayout.widthSize)] myMultiply:(1/3.0)];
+        [leftItemLayout.heightSize myEqualTo:(rootLayout.heightSize)];
         leftItemLayout.highlightedOpacity = 0.5;
         [rootLayout addSubview:leftItemLayout];
         
@@ -38,18 +38,18 @@
         bld.tailIndent = bld.headIndent = 5;
         
         MyFrameLayout *centerItemLayout = [self createItemLayout:NSLocalizedString(@"Topic", @"") withTag:1];
-        centerItemLayout.widthSize.equalTo(rootLayout.widthSize).multiply(1/3.0);
-        centerItemLayout.heightSize.equalTo(rootLayout.heightSize);
-        centerItemLayout.centerXPos.equalTo(@0);
+        [[centerItemLayout.widthSize myEqualTo:(rootLayout.widthSize)] myMultiply:(1/3.0)];
+        [centerItemLayout.heightSize myEqualTo:(rootLayout.heightSize)];
+        [centerItemLayout.centerXPos myEqualTo:(@0)];
         centerItemLayout.leadingBorderline = bld;
         centerItemLayout.highlightedOpacity = 0.5;
         [rootLayout addSubview:centerItemLayout];
         
         
         MyFrameLayout *rightItemLayout = [self createItemLayout:NSLocalizedString(@"Follow", @"") withTag:2];
-        rightItemLayout.widthSize.equalTo(rootLayout.widthSize).multiply(1/3.0);
-        rightItemLayout.heightSize.equalTo(rootLayout.heightSize);
-        rightItemLayout.trailingPos.equalTo(@0);
+        [[rightItemLayout.widthSize myEqualTo:(rootLayout.widthSize)] myMultiply:(1/3.0)];
+        [rightItemLayout.heightSize myEqualTo:(rootLayout.heightSize)];
+        [rightItemLayout.trailingPos myEqualTo:(@0)];
         rightItemLayout.leadingBorderline = bld;
         rightItemLayout.highlightedOpacity = 0.5;
         [rootLayout addSubview:rightItemLayout];
@@ -57,12 +57,12 @@
         //底部的横线
         _underLineView = [UIView new];
         _underLineView.backgroundColor = [UIColor redColor];
-        _underLineView.widthSize.equalTo(rootLayout.widthSize).multiply(1/3.0);
-        _underLineView.heightSize.equalTo(@2);
-        _underLineView.bottomPos.equalTo(@0);
-        _underLineView.leadingPos.equalTo(@0).active = YES;   //设置左边位置有效
-        _underLineView.centerXPos.equalTo(@0).active = NO;  //设置水平中间位置无效
-        _underLineView.trailingPos.equalTo(@0).active = NO;    //设置右边位置无效
+        [[_underLineView.widthSize myEqualTo:(rootLayout.widthSize)] myMultiply:(1/3.0)];
+        [_underLineView.heightSize myEqualTo:(@2)];
+        [_underLineView.bottomPos myEqualTo:(@0)];
+        [_underLineView.leadingPos myEqualTo:(@0)].active = YES;   //设置左边位置有效
+        [_underLineView.centerXPos myEqualTo:(@0)].active = NO;  //设置水平中间位置无效
+        [_underLineView.trailingPos myEqualTo:(@0)].active = NO;    //设置右边位置无效
         [rootLayout addSubview:_underLineView];
         
         MyBorderline *rootLayoutBld = [[MyBorderline alloc] initWithColor:[UIColor lightGrayColor]];
@@ -94,8 +94,8 @@
     titleLabel.text = title;
     titleLabel.font = [UIFont systemFontOfSize:15];
     [titleLabel sizeToFit];
-    titleLabel.centerXPos.equalTo(@0);
-    titleLabel.centerYPos.equalTo(@0); //标题尺寸由内容包裹，位置在布局视图中居中。
+    [titleLabel.centerXPos myEqualTo:(@0)];
+    [titleLabel.centerYPos myEqualTo:(@0)]; //标题尺寸由内容包裹，位置在布局视图中居中。
     [itemLayout addSubview:titleLabel];
     
     return itemLayout;

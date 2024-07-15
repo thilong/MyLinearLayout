@@ -55,8 +55,8 @@
     todayLabel.font = [CFTool font:17];
     todayLabel.textColor = [CFTool color:4];
     [todayLabel sizeToFit];
-    todayLabel.centerXPos.equalTo(@0);  //水平中心点在父布局水平中心点的偏移为0，意味着和父视图水平居中对齐。
-    todayLabel.topPos.equalTo(@20);     //顶部离父视图的边距为20
+    [todayLabel.centerXPos myEqualTo:(@0)];  //水平中心点在父布局水平中心点的偏移为0，意味着和父视图水平居中对齐。
+    [todayLabel.topPos myEqualTo:(@20)];     //顶部离父视图的边距为20
     [rootLayout addSubview:todayLabel];
     /*
      [todayLabel makeLayout:^(MyMaker *make) {
@@ -72,10 +72,10 @@
      */
     UIView *topLeftCircle = [UIView new];
     topLeftCircle.backgroundColor = [CFTool color:2];
-    topLeftCircle.widthSize.equalTo(rootLayout.widthSize).multiply(3/5.0).max(200); //宽度是父视图宽度的3/5,且最大只能是200。
-    topLeftCircle.heightSize.equalTo(topLeftCircle.widthSize);    //高度和自身宽度相等。
-    topLeftCircle.leadingPos.equalTo(@10);    //左边距离父视图10
-    topLeftCircle.topPos.equalTo(@90);     //顶部距离父视图90
+    [[[topLeftCircle.widthSize myEqualTo:(rootLayout.widthSize)] myMultiply:(3/5.0)] myMax:(200)]; //宽度是父视图宽度的3/5,且最大只能是200。
+    [topLeftCircle.heightSize myEqualTo:(topLeftCircle.widthSize)];    //高度和自身宽度相等。
+    [topLeftCircle.leadingPos myEqualTo:(@10)];    //左边距离父视图10
+    [topLeftCircle.topPos myEqualTo:(@90)];     //顶部距离父视图90
     [rootLayout addSubview:topLeftCircle];
     
     __weak UIView* weakGreenCircle = topLeftCircle;
@@ -102,8 +102,8 @@
     walkLabel.textColor = [CFTool color:5];
     walkLabel.font = [CFTool font:15];
     [walkLabel sizeToFit];
-    walkLabel.centerXPos.equalTo(topLeftCircle.centerXPos);      //水平中心点和greenCircle水平中心点一致，意味着和greenCircle水平居中对齐。
-    walkLabel.bottomPos.equalTo(topLeftCircle.topPos).offset(5);  //底部是greenCircle的顶部再往上偏移5个点。
+    [walkLabel.centerXPos myEqualTo:(topLeftCircle.centerXPos)];      //水平中心点和greenCircle水平中心点一致，意味着和greenCircle水平居中对齐。
+    [[walkLabel.bottomPos myEqualTo:(topLeftCircle.topPos)] myOffset:(5)];  //底部是greenCircle的顶部再往上偏移5个点。
     [rootLayout addSubview:walkLabel];
    /* 
     [walkLabel makeLayout:^(MyMaker *make) {
@@ -120,8 +120,8 @@
     walkSteps.font = [CFTool font:15];
     walkSteps.textColor = [CFTool color:0];
     [walkSteps sizeToFit];
-    walkSteps.centerXPos.equalTo(topLeftCircle.centerXPos);
-    walkSteps.centerYPos.equalTo(topLeftCircle.centerYPos);   //水平中心点和垂直中心点都和greenCircle一样，意味着二者居中对齐。
+    [walkSteps.centerXPos myEqualTo:(topLeftCircle.centerXPos)];
+    [walkSteps.centerYPos myEqualTo:(topLeftCircle.centerYPos)];   //水平中心点和垂直中心点都和greenCircle一样，意味着二者居中对齐。
     [rootLayout addSubview:walkSteps];
    /*
     [walkSteps makeLayout:^(MyMaker *make) {
@@ -138,8 +138,8 @@
     steps.textColor = [CFTool color:8];
     steps.font = [CFTool font:15];
     [steps sizeToFit];
-    steps.centerXPos.equalTo(walkSteps.centerXPos);  //和walkSteps水平居中对齐。
-    steps.topPos.equalTo(walkSteps.bottomPos);       //顶部是walkSteps的底部。
+    [steps.centerXPos myEqualTo:(walkSteps.centerXPos)];  //和walkSteps水平居中对齐。
+    [steps.topPos myEqualTo:(walkSteps.bottomPos)];       //顶部是walkSteps的底部。
     [rootLayout addSubview:steps];
     /*
     [steps makeLayout:^(MyMaker *make) {
@@ -155,10 +155,10 @@
      */
     UIView *topRightCircle = [UIView new];
     topRightCircle.backgroundColor = [CFTool color:3];
-    topRightCircle.topPos.equalTo(topLeftCircle.topPos).offset(-10);  //顶部和greenCircle顶部对齐，并且往上偏移10个点。
-    topRightCircle.trailingPos.equalTo(rootLayout.trailingPos).offset(10);  //右边和布局视图右对齐，并且往左边偏移10个点。
-    topRightCircle.widthSize.equalTo(@120);                           //宽度是120
-    topRightCircle.heightSize.equalTo(topRightCircle.widthSize);           //高度和宽度相等。
+    [[topRightCircle.topPos myEqualTo:(topLeftCircle.topPos)] myOffset:(-10)];  //顶部和greenCircle顶部对齐，并且往上偏移10个点。
+    [[topRightCircle.trailingPos myEqualTo:(rootLayout.trailingPos)] myOffset:(10)];  //右边和布局视图右对齐，并且往左边偏移10个点。
+    [topRightCircle.widthSize myEqualTo:(@120)];                           //宽度是120
+    [topRightCircle.heightSize myEqualTo:(topRightCircle.widthSize)];           //高度和宽度相等。
     topRightCircle.viewLayoutCompleteBlock = ^(MyBaseLayout *layout, UIView *sbv)
     {//viewLayoutCompleteBlock是在子视图布局完成后给子视图一个机会进行一些特殊设置的block。这里面我们将子视图的半径设置为尺寸的一半，这样就可以实现在任意的屏幕上，这个子视图总是呈现为圆形。viewLayoutCompleteBlock只会在布局完成后调用一次，就会被布局系统销毁。
         sbv.layer.cornerRadius = sbv.frame.size.width / 2;
@@ -180,8 +180,8 @@
     cycleLabel.textColor = [CFTool color:6];
     cycleLabel.font = [CFTool font:15];
     [cycleLabel sizeToFit];
-    cycleLabel.centerXPos.equalTo(topRightCircle.centerXPos);        //和blueCircle水平居中对齐
-    cycleLabel.bottomPos.equalTo(topRightCircle.topPos).offset(5);   //底部在blueCircle的上面，再往下偏移5个点。
+    [cycleLabel.centerXPos myEqualTo:(topRightCircle.centerXPos)];        //和blueCircle水平居中对齐
+    [[cycleLabel.bottomPos myEqualTo:(topRightCircle.topPos)] myOffset:(5)];   //底部在blueCircle的上面，再往下偏移5个点。
     [rootLayout addSubview:cycleLabel];
     /*
     [cycleLabel makeLayout:^(MyMaker *make) {
@@ -198,8 +198,8 @@
     cycleMin.textColor = [CFTool color:0];
     cycleMin.font = [CFTool font:15];
     [cycleMin sizeToFit];
-    cycleMin.leadingPos.equalTo(topRightCircle.leadingPos);     //左边和blueCircle左对齐
-    cycleMin.centerYPos.equalTo(topRightCircle.centerYPos);  //和blueCircle垂直居中对齐。
+    [cycleMin.leadingPos myEqualTo:(topRightCircle.leadingPos)];     //左边和blueCircle左对齐
+    [cycleMin.centerYPos myEqualTo:(topRightCircle.centerYPos)];  //和blueCircle垂直居中对齐。
     [rootLayout addSubview:cycleMin];
     /*
     [cycleMin makeLayout:^(MyMaker *make) {
@@ -216,10 +216,10 @@
      */
     UIView *lineView1 = [UIView new];
     lineView1.backgroundColor = [CFTool color:7];
-    lineView1.leadingPos.equalTo(@0);
-    lineView1.trailingPos.equalTo(@0);  //和父布局的左右边距为0，这个也同时确定了视图的宽度和父视图一样。
-    lineView1.heightSize.equalTo(@2);  //高度固定为2
-    lineView1.centerYPos.equalTo(@0);   //和父视图垂直居中对齐。
+    [lineView1.leadingPos myEqualTo:(@0)];
+    [lineView1.trailingPos myEqualTo:(@0)];  //和父布局的左右边距为0，这个也同时确定了视图的宽度和父视图一样。
+    [lineView1.heightSize myEqualTo:(@2)];  //高度固定为2
+    [lineView1.centerYPos myEqualTo:(@0)];   //和父视图垂直居中对齐。
     [rootLayout addSubview:lineView1];
     /*
     [lineView1 makeLayout:^(MyMaker *make) {
@@ -231,10 +231,10 @@
     
     UIView *lineView2 = [UIView new];
     lineView2.backgroundColor = [CFTool color:8];
-    lineView2.widthSize.equalTo(rootLayout.widthSize).add(-20);  //宽度等于父视图的宽度减20
-    lineView2.heightSize.equalTo(@2);                            //高度固定为2
-    lineView2.topPos.equalTo(lineView1.bottomPos).offset(2);    //顶部在lineView1的下面往下偏移2
-    lineView2.centerXPos.equalTo(rootLayout.centerXPos);       //和父视图水平居中对齐
+    [[lineView2.widthSize myEqualTo:(rootLayout.widthSize)] myAdd:(-20)];  //宽度等于父视图的宽度减20
+    [lineView2.heightSize myEqualTo:(@2)];                            //高度固定为2
+    [[lineView2.topPos myEqualTo:(lineView1.bottomPos)] myOffset:(2)];    //顶部在lineView1的下面往下偏移2
+    [lineView2.centerXPos myEqualTo:(rootLayout.centerXPos)];       //和父视图水平居中对齐
     [rootLayout addSubview:lineView2];
    /* 
     [lineView2 makeLayout:^(MyMaker *make) {
@@ -251,10 +251,10 @@
     squareView.backgroundColor = [CFTool color:9];
     //宽度是父布局宽度和高度二者之间的最小值的1/5, 高度等于宽度。
     //这里面用到了数组的一个扩展属性myMinSize。要求数组中的元素必须是MyLayoutSize类型，而且这些值也必须在本视图约束计算前已经有明确的值。
-    squareView.widthSize.equalTo(@[rootLayout.widthSize, rootLayout.heightSize].myMinSize).multiply(0.2);
-    squareView.heightSize.equalTo(squareView.widthSize);
-    squareView.centerXPos.equalTo(rootLayout.centerXPos);
-    squareView.centerYPos.equalTo(rootLayout.centerYPos).offset(40);
+    [[squareView.widthSize myEqualTo:(@[rootLayout.widthSize, rootLayout.heightSize].myMinSize)] myMultiply:(0.2)];
+    [squareView.heightSize myEqualTo:(squareView.widthSize)];
+    [squareView.centerXPos myEqualTo:(rootLayout.centerXPos)];
+    [[squareView.centerYPos myEqualTo:(rootLayout.centerYPos)] myOffset:(40)];
     [rootLayout addSubview:squareView];
     
     
@@ -264,10 +264,10 @@
     UIView *bottomHalfCircleView = [UIView new];
     bottomHalfCircleView.backgroundColor = [CFTool color:5];
     bottomHalfCircleView.layer.cornerRadius = 25;
-    bottomHalfCircleView.widthSize.equalTo(@50);      //宽度固定为50
-    bottomHalfCircleView.heightSize.equalTo(bottomHalfCircleView.widthSize);  //高度等于宽度
-    bottomHalfCircleView.centerYPos.equalTo(rootLayout.bottomPos).offset(10); //垂直中心点和父布局的底部对齐，并且往下偏移10个点。 因为rootLayout设置了paddingBottom为10，所以这里要偏移10，否则不需要设置偏移。
-    bottomHalfCircleView.leadingPos.equalTo(rootLayout.leadingPos).offset(50); //左边父布局左对齐，并且向右偏移50个点。
+    [bottomHalfCircleView.widthSize myEqualTo:(@50)];      //宽度固定为50
+    [bottomHalfCircleView.heightSize myEqualTo:(bottomHalfCircleView.widthSize)];  //高度等于宽度
+    [[bottomHalfCircleView.centerYPos myEqualTo:(rootLayout.bottomPos)] myOffset:(10)]; //垂直中心点和父布局的底部对齐，并且往下偏移10个点。 因为rootLayout设置了paddingBottom为10，所以这里要偏移10，否则不需要设置偏移。
+    [[bottomHalfCircleView.leadingPos myEqualTo:(rootLayout.leadingPos)] myOffset:(50)]; //左边父布局左对齐，并且向右偏移50个点。
     [rootLayout addSubview:bottomHalfCircleView];
     /*
     [bottomHalfCircleView makeLayout:^(MyMaker *make) {
@@ -282,10 +282,10 @@
     
     UIView *lineView3 = [UIView new];
     lineView3.backgroundColor = [CFTool color:5];
-    lineView3.widthSize.equalTo(@5);
-    lineView3.heightSize.equalTo(@50);
-    lineView3.bottomPos.equalTo(bottomHalfCircleView.topPos);
-    lineView3.centerXPos.equalTo(bottomHalfCircleView.centerXPos);
+    [lineView3.widthSize myEqualTo:(@5)];
+    [lineView3.heightSize myEqualTo:(@50)];
+    [lineView3.bottomPos myEqualTo:(bottomHalfCircleView.topPos)];
+    [lineView3.centerXPos myEqualTo:(bottomHalfCircleView.centerXPos)];
     [rootLayout addSubview:lineView3];
     /*
     [lineView3 makeLayout:^(MyMaker *make) {
@@ -300,8 +300,8 @@
     walkLabel2.font = [CFTool font:15];
     walkLabel2.textColor = [CFTool color:11];
     [walkLabel2 sizeToFit];
-    walkLabel2.leadingPos.equalTo(lineView3.trailingPos).offset(15);
-    walkLabel2.centerYPos.equalTo(lineView3.centerYPos);
+    [[walkLabel2.leadingPos myEqualTo:(lineView3.trailingPos)] myOffset:(15)];
+    [walkLabel2.centerYPos myEqualTo:(lineView3.centerYPos)];
     [rootLayout addSubview:walkLabel2];
     /*
     [walkLabel2 makeLayout:^(MyMaker *make) {
@@ -317,8 +317,8 @@
     walkLabel3.font = [CFTool font:20];
     walkLabel3.textColor = [CFTool color:12];
     [walkLabel3 sizeToFit];
-    walkLabel3.leadingPos.equalTo(walkLabel2.trailingPos).offset(5);
-    walkLabel3.baselinePos.equalTo(walkLabel2.baselinePos);  //walkLabel3的基线和walkLabel2的基线对齐。
+    [[walkLabel3.leadingPos myEqualTo:(walkLabel2.trailingPos)] myOffset:(5)];
+    [walkLabel3.baselinePos myEqualTo:(walkLabel2.baselinePos)];  //walkLabel3的基线和walkLabel2的基线对齐。
     [rootLayout addSubview:walkLabel3];
     /*
     [walkLabel3 makeLayout:^(MyMaker *make) {
@@ -335,8 +335,8 @@
     timeLabel1.font = [CFTool font:14];
     timeLabel1.textColor = [CFTool color:12];
     [timeLabel1 sizeToFit];
-    timeLabel1.trailingPos.equalTo(lineView3.leadingPos).offset(25);
-    timeLabel1.centerYPos.equalTo(lineView3.topPos);
+    [[timeLabel1.trailingPos myEqualTo:(lineView3.leadingPos)] myOffset:(25)];
+    [timeLabel1.centerYPos myEqualTo:(lineView3.topPos)];
     [rootLayout addSubview:timeLabel1];
     /*
     [timeLabel1 makeLayout:^(MyMaker *make) {
@@ -353,8 +353,8 @@
     timeLabel2.font = [CFTool font:14];
     timeLabel2.textColor = [CFTool color:12];
     [timeLabel2 sizeToFit];
-    timeLabel2.trailingPos.equalTo(timeLabel1.trailingPos);
-    timeLabel2.centerYPos.equalTo(lineView3.bottomPos);
+    [timeLabel2.trailingPos myEqualTo:(timeLabel1.trailingPos)];
+    [timeLabel2.centerYPos myEqualTo:(lineView3.bottomPos)];
     [rootLayout addSubview:timeLabel2];
     /*
     [timeLabel2 makeLayout:^(MyMaker *make) {
@@ -369,10 +369,10 @@
     UIView *lineView4 = [UIView new];
     lineView4.backgroundColor = [CFTool color:5];
     lineView4.layer.cornerRadius = 25;
-    lineView4.widthSize.equalTo(bottomHalfCircleView.widthSize);
-    lineView4.heightSize.equalTo(lineView4.widthSize).add(30);
-    lineView4.bottomPos.equalTo(lineView3.topPos);
-    lineView4.centerXPos.equalTo(lineView3.centerXPos);
+    [lineView4.widthSize myEqualTo:(bottomHalfCircleView.widthSize)];
+    [[lineView4.heightSize myEqualTo:(lineView4.widthSize)] myAdd:(30)];
+    [lineView4.bottomPos myEqualTo:(lineView3.topPos)];
+    [lineView4.centerXPos myEqualTo:(lineView3.centerXPos)];
     [rootLayout addSubview:lineView4];
     /*
     [lineView4 makeLayout:^(MyMaker *make) {
@@ -385,10 +385,10 @@
      */
     
     UIImageView *imageView4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"user"]];
-    imageView4.widthSize.equalTo(lineView4.widthSize).multiply(1/3.0);
-    imageView4.heightSize.equalTo(imageView4.widthSize);
-    imageView4.centerXPos.equalTo(lineView4.centerXPos);
-    imageView4.centerYPos.equalTo(lineView4.centerYPos);
+    [[imageView4.widthSize myEqualTo:(lineView4.widthSize)] myMultiply:(1/3.0)];
+    [imageView4.heightSize myEqualTo:(imageView4.widthSize)];
+    [imageView4.centerXPos myEqualTo:(lineView4.centerXPos)];
+    [imageView4.centerYPos myEqualTo:(lineView4.centerYPos)];
     [rootLayout addSubview:imageView4];
     /*
     [imageView4 makeLayout:^(MyMaker *make) {
@@ -405,8 +405,8 @@
     homeLabel.font = [CFTool font:15];
     homeLabel.textColor = [CFTool color:4];
     [homeLabel sizeToFit];
-    homeLabel.leadingPos.equalTo(lineView4.trailingPos).offset(10);
-    homeLabel.centerYPos.equalTo(lineView4.centerYPos);
+    [[homeLabel.leadingPos myEqualTo:(lineView4.trailingPos)] myOffset:(10)];
+    [homeLabel.centerYPos myEqualTo:(lineView4.centerYPos)];
     [rootLayout addSubview:homeLabel];
     /*
     [homeLabel makeLayout:^(MyMaker *make) {
@@ -422,8 +422,8 @@
       右下角区域部分。
      */
     UIImageView *bottomRightImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"head1"]];
-    bottomRightImageView.trailingPos.equalTo(rootLayout.trailingPos);
-    bottomRightImageView.bottomPos.equalTo(rootLayout.bottomPos);
+    [bottomRightImageView.trailingPos myEqualTo:(rootLayout.trailingPos)];
+    [bottomRightImageView.bottomPos myEqualTo:(rootLayout.bottomPos)];
     [rootLayout addSubview:bottomRightImageView];
     /*
     [bottomRightImageView makeLayout:^(MyMaker *make) {

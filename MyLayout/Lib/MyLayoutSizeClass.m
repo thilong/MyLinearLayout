@@ -335,7 +335,7 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyTop:(CGFloat)myTop {
-    self.topPos.myEqualTo(@(myTop));
+    [self.topPos myEqualTo:@(myTop)];
 }
 
 - (CGFloat)myLeading {
@@ -343,7 +343,7 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyLeading:(CGFloat)myLeading {
-    self.leadingPos.myEqualTo(@(myLeading));
+    [self.leadingPos myEqualTo:(@(myLeading))];
 }
 
 - (CGFloat)myBottom {
@@ -351,7 +351,7 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyBottom:(CGFloat)myBottom {
-    self.bottomPos.myEqualTo(@(myBottom));
+    [self.bottomPos myEqualTo:(@(myBottom))];
 }
 
 - (CGFloat)myTrailing {
@@ -359,7 +359,7 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyTrailing:(CGFloat)myTrailing {
-    self.trailingPos.myEqualTo(@(myTrailing));
+    [self.trailingPos myEqualTo:(@(myTrailing))];
 }
 
 - (CGFloat)myCenterX {
@@ -367,7 +367,7 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyCenterX:(CGFloat)myCenterX {
-    self.centerXPos.myEqualTo(@(myCenterX));
+    [self.centerXPos myEqualTo:(@(myCenterX))];
 }
 
 - (CGFloat)myCenterY {
@@ -375,7 +375,7 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyCenterY:(CGFloat)myCenterY {
-    self.centerYPos.myEqualTo(@(myCenterY));
+    [self.centerYPos myEqualTo:(@(myCenterY))];
 }
 
 - (CGPoint)myCenter {
@@ -392,7 +392,7 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyLeft:(CGFloat)myLeft {
-    self.leftPos.myEqualTo(@(myLeft));
+    [self.leftPos myEqualTo:(@(myLeft))];
 }
 
 - (CGFloat)myRight {
@@ -400,7 +400,7 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyRight:(CGFloat)myRight {
-    self.rightPos.myEqualTo(@(myRight));
+    [self.rightPos myEqualTo:(@(myRight))];
 }
 
 - (CGFloat)myMargin {
@@ -408,10 +408,10 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyMargin:(CGFloat)myMargin {
-    self.topPos.myEqualTo(@(myMargin));
-    self.leftPos.myEqualTo(@(myMargin));
-    self.rightPos.myEqualTo(@(myMargin));
-    self.bottomPos.myEqualTo(@(myMargin));
+    [self.topPos myEqualTo:(@(myMargin))];
+    [self.leftPos myEqualTo:(@(myMargin))];
+    [self.rightPos myEqualTo:(@(myMargin))];
+    [self.bottomPos myEqualTo:(@(myMargin))];
 }
 
 - (CGFloat)myHorzMargin {
@@ -419,8 +419,8 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyHorzMargin:(CGFloat)myHorzMargin {
-    self.leftPos.myEqualTo(@(myHorzMargin));
-    self.rightPos.myEqualTo(@(myHorzMargin));
+    [self.leftPos myEqualTo:(@(myHorzMargin))];
+    [self.rightPos myEqualTo:(@(myHorzMargin))];
 }
 
 - (CGFloat)myVertMargin {
@@ -428,8 +428,8 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyVertMargin:(CGFloat)myVertMargin {
-    self.topPos.myEqualTo(@(myVertMargin));
-    self.bottomPos.myEqualTo(@(myVertMargin));
+    [self.topPos myEqualTo:(@(myVertMargin))];
+     [self.bottomPos myEqualTo:(@(myVertMargin))];
 }
 
 - (MyLayoutSize *)widthSize {
@@ -462,7 +462,7 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyWidth:(CGFloat)width {
-    self.widthSize.myEqualTo(@(width));
+    [self.widthSize myEqualTo:(@(width))];
 }
 
 - (CGFloat)myHeight {
@@ -476,7 +476,7 @@ BOOL _myisRTL = NO;
 }
 
 - (void)setMyHeight:(CGFloat)height {
-    self.heightSize.myEqualTo(@(height));
+    [self.heightSize myEqualTo:(@(height))];
 }
 
 - (CGSize)mySize {
@@ -507,7 +507,7 @@ BOOL _myisRTL = NO;
 
 - (void)setWrapContentWidth:(BOOL)wrapContentWidth {
     if (wrapContentWidth) {
-        self.widthSize.myEqualTo(@(MyLayoutSize.wrap));
+        [self.widthSize myEqualTo:(@(MyLayoutSize.wrap))];
     } else {
         //只有是以前设置了宽度自适应，这里取消自适应后才会将尺寸清除！目的是为了兼容老版本。
         if (_widthSize.isWrap) {
@@ -518,7 +518,7 @@ BOOL _myisRTL = NO;
 
 - (void)setWrapContentHeight:(BOOL)wrapContentHeight {
     if (wrapContentHeight) {
-        self.heightSize.myEqualTo(@(MyLayoutSize.wrap));
+        [self.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     } else {
         //只有是以前设置了高度自适应，这里取消自适应后才会将尺寸清除！目的是为了兼容老版本。
         if (_heightSize.isWrap) {

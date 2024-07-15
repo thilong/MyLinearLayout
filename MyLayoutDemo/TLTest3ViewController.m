@@ -44,9 +44,9 @@
     //MyLayoutPos.safeAreaMargin表示视图的边距不是一个固定的值而是所在的父视图的安全区域。这样布局视图就不会延伸到安全区域以外去了。
     //MyLayoutPos.safeAreaMargin是同时支持iOS11和以下的版本的，对于iOS11以下的版本则顶部安全区域是状态栏以下的位置。
     //因此只要你设置边距为MyLayoutPos.safeAreaMargin则可以同时兼容所有iOS的版本。。
-    tableLayout.leadingPos.equalTo(@(MyLayoutPos.safeAreaMargin)).offset(10);
-    tableLayout.trailingPos.equalTo(@(MyLayoutPos.safeAreaMargin)).offset(10);
-    tableLayout.topPos.equalTo(@(MyLayoutPos.safeAreaMargin)).offset(10);
+    [[tableLayout.leadingPos myEqualTo:(@(MyLayoutPos.safeAreaMargin))] myOffset:(10)];
+    [[tableLayout.trailingPos myEqualTo:(@(MyLayoutPos.safeAreaMargin))] myOffset:(10)];
+    [[tableLayout.topPos myEqualTo:(@(MyLayoutPos.safeAreaMargin))] myOffset:(10)];
     
 
     //如果你的左右边距都是安全区域，那么可以用下面的方法来简化设置。您可以注释掉这句代码看看效果。

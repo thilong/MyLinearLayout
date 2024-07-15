@@ -46,8 +46,8 @@
     tipLabel.font = [CFTool font:13];
     tipLabel.text = NSLocalizedString(@"  You can drag the following tag to adjust location in layout, MyLayout can use subview's useFrame,noLayout property and layout view's autoresizesSubviews propery to complete some position adjustment and the overall animation features: \n useFrame set to YES indicates subview is not controlled by the layout view but use its own frame to set the location and size instead.\n \n autoresizesSubviews set to NO indicate layout view will not do any layout operation, and will remain in the position and size of all subviews.\n \n noLayout set to YES indicate subview in the layout view just only take up the position and size but not real adjust the position and size when layouting.", @"");
     tipLabel.textColor = [CFTool color:4];
-    tipLabel.heightSize.equalTo(@(MyLayoutSize.wrap)); //这两个属性结合着使用实现自动换行和文本的动态高度。
-    tipLabel.topPos.equalTo(self.topLayoutGuide);   //子视图不会延伸到导航条屏幕下面。
+    [tipLabel.heightSize myEqualTo:(@(MyLayoutSize.wrap))]; //这两个属性结合着使用实现自动换行和文本的动态高度。
+    [tipLabel.topPos myEqualTo:(self.topLayoutGuide)];   //子视图不会延伸到导航条屏幕下面。
     [rootLayout addSubview:tipLabel];
     
     
@@ -108,7 +108,7 @@
     tagButton.titleLabel.font = [CFTool font:14];
     tagButton.layer.cornerRadius = 20;
     tagButton.backgroundColor = [CFTool color:(random()%14 + 1)];
-    tagButton.heightSize.equalTo(@44);
+    [tagButton.heightSize myEqualTo:(@44)];
     
     [tagButton addTarget:self.dragger action:@selector(dragginView:withEvent:) forControlEvents:UIControlEventTouchDragInside]; //注册拖动事件。
     [tagButton addTarget:self.dragger action:@selector(dragginView:withEvent:) forControlEvents:UIControlEventTouchDragOutside]; //注册外面拖动事件。
@@ -130,7 +130,7 @@
     addButton.layer.cornerRadius = 20;
     addButton.layer.borderWidth = 0.5;
     addButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    addButton.heightSize.equalTo(@44);
+    [addButton.heightSize myEqualTo:(@44)];
     
     [addButton addTarget:self action:@selector(handleAddTagButton:) forControlEvents:UIControlEventTouchUpInside];
     

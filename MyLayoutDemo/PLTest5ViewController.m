@@ -29,8 +29,8 @@
     if (self != nil)
     {
         _imageView = [[UIImageView alloc] initWithImage:image];
-        _imageView.widthSize.equalTo(@50).multiply(1);
-        _imageView.heightSize.equalTo(@50).multiply(1);
+        [[_imageView.widthSize myEqualTo:(@50)] myMultiply:(1)];
+        [[_imageView.heightSize myEqualTo:(@50)] myMultiply:(1)];
         _imageView.layer.cornerRadius = 25 * 1;
         _imageView.clipsToBounds = YES;
         _imageView.backgroundColor = [UIColor whiteColor];
@@ -127,8 +127,8 @@
         
         //图片的缩放比例因子比文字的缩放还要大。
       //  factor = pow(factor, 3);
-        itemLayout.imageView.widthSize.multiply(factor);
-        itemLayout.imageView.heightSize.multiply(factor);
+        [itemLayout.imageView.widthSize myMultiply:(factor)];
+        [itemLayout.imageView.heightSize myMultiply:(factor)];
         itemLayout.imageView.layer.cornerRadius = 25 * factor;
         
     };

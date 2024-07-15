@@ -438,7 +438,7 @@
 -(void)handleNavigationTitleCentre:(id)sender
 {
     MyLinearLayout *navigationItemLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
-    navigationItemLayout.heightSize.equalTo(nil); //将布局放入navigationItem的titleView时不要设置高度约束
+    [navigationItemLayout.heightSize myEqualTo:(nil)]; //将布局放入navigationItem的titleView时不要设置高度约束
     
     //通过MyGravity_Horz_Window_Center的设置总是保证在窗口的中间而不是布局视图的中间。
     navigationItemLayout.gravity = MyGravity_Horz_Window_Center | MyGravity_Vert_Center;

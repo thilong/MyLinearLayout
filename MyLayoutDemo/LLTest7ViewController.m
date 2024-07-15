@@ -47,8 +47,8 @@
     
     //创建动作布局
     MyLinearLayout *action1Layout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Horz];
-    action1Layout.heightSize.equalTo(@(MyLayoutSize.wrap));
-    action1Layout.topPos.equalTo(self.topLayoutGuide);
+    [action1Layout.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
+    [action1Layout.topPos myEqualTo:(self.topLayoutGuide)];
     [rootLayout addSubview:action1Layout];
     
     [action1Layout addSubview:[self createActionButton:NSLocalizedString(@"average size&space no centered", @"") tag:100]];
@@ -58,7 +58,7 @@
 
     //创建动作布局
     MyLinearLayout *action2Layout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Horz];
-    action2Layout.heightSize.equalTo(@(MyLayoutSize.wrap));
+    [action2Layout.heightSize myEqualTo:(@(MyLayoutSize.wrap))];
     [rootLayout addSubview:action2Layout];
     
     [action2Layout addSubview:[self createActionButton:NSLocalizedString(@"average size centered",@"") tag:400]];
@@ -124,7 +124,7 @@
     button.titleLabel.adjustsFontSizeToFitWidth = YES;
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
     button.titleLabel.font = [CFTool font:14];
-    button.heightSize.equalTo(@(MyLayoutSize.wrap)).add(20);  //高度自适应外加20的
+    [[button.heightSize myEqualTo:(@(MyLayoutSize.wrap))] myAdd:(20)];  //高度自适应外加20的
     button.layer.borderColor = [UIColor lightGrayColor].CGColor;
     button.layer.borderWidth = 0.5;
     button.layer.cornerRadius = 4;

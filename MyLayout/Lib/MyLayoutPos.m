@@ -35,85 +35,45 @@
     return self;
 }
 
-- (MyLayoutPos * (^)(id val))myEqualTo {
-    return ^id(id val) {
-        [self _myEqualTo:val];
-        [self setNeedsLayout];
-        return self;
-    };
+- (MyLayoutPos *)myEqualTo:(id)value {
+    [self _myEqualTo:value];
+    [self setNeedsLayout];
+    return self;
 }
 
-- (MyLayoutPos * (^)(CGFloat val))myOffset {
-    return ^id(CGFloat val) {
-        [self _myOffset:val];
-        [self setNeedsLayout];
-        return self;
-    };
+- (MyLayoutPos *)myOffset:(CGFloat)value {
+    [self _myOffset:value];
+    [self setNeedsLayout];
+    return self;
 }
 
-- (MyLayoutPos * (^)(CGFloat val))myMin {
-    return ^id(CGFloat val) {
-        [self _myMin:val];
-        [self setNeedsLayout];
-        return self;
-    };
+- (MyLayoutPos *)myMin:(CGFloat)value {
+    [self _myMin:value];
+    [self setNeedsLayout];
+    return self;
 }
 
-- (MyLayoutPos * (^)(CGFloat val))myMax {
-    return ^id(CGFloat val) {
-        [self _myMax:val];
-        [self setNeedsLayout];
-        return self;
-    };
+- (MyLayoutPos *)myMax:(CGFloat)value {
+    [self _myMax:value];
+    [self setNeedsLayout];
+    return self;
 }
 
-- (MyLayoutPos * (^)(id posVal, CGFloat offset))myLBound {
-    return ^id(id posVal, CGFloat offset) {
-        [self _myLBound:posVal offsetVal:offset];
-        [self setNeedsLayout];
-        return self;
-    };
+- (MyLayoutPos *)myLBound:(id)posValue offset:(CGFloat)offset {
+    [self _myLBound:posValue offsetVal:offset];
+    [self setNeedsLayout];
+    return self;
 }
 
-- (MyLayoutPos * (^)(id posVal, CGFloat offset))myUBound {
-    return ^id(id posVal, CGFloat offset) {
-        [self _myUBound:posVal offsetVal:offset];
-        [self setNeedsLayout];
-        return self;
-    };
+- (MyLayoutPos *)myUBound:(id)posValue offset:(CGFloat)offset {
+    [self _myUBound:posValue offsetVal:offset];
+    [self setNeedsLayout];
+    return self;
 }
 
 - (void)myClear {
     [self _myClear];
     [self setNeedsLayout];
-}
-
-- (MyLayoutPos * (^)(id val))equalTo {
-    return self.myEqualTo;
-}
-
-- (MyLayoutPos * (^)(CGFloat val))offset {
-    return self.myOffset;
-}
-
-- (MyLayoutPos * (^)(CGFloat val))min {
-    return self.myMin;
-}
-
-- (MyLayoutPos * (^)(id posVal, CGFloat offsetVal))lBound {
-    return self.myLBound;
-}
-
-- (MyLayoutPos * (^)(CGFloat val))max {
-    return self.myMax;
-}
-
-- (MyLayoutPos * (^)(id posVal, CGFloat offsetVal))uBound {
-    return self.myUBound;
-}
-
-- (void)clear {
-    [self myClear];
 }
 
 - (void)setActive:(BOOL)active {
@@ -540,14 +500,14 @@
 
 @implementation MyLayoutPos (Clone)
 
-- (MyLayoutPos * (^)(CGFloat offsetVal))clone {
-    return ^id(CGFloat offsetVal) {
+- (MyLayoutPos *)myClone:(CGFloat)offsetVal {
+    
         MyLayoutPos *clonedAnchor = [[[self class] allocWithZone:nil] init];
         clonedAnchor->_offsetVal = offsetVal;
         clonedAnchor->_val = self;
         clonedAnchor->_valType = MyLayoutValType_LayoutAnchorClone;
         return clonedAnchor;
-    };
+    
 }
 
 @end

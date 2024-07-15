@@ -29,14 +29,6 @@
 
 @property (nonatomic, assign) CGFloat offsetVal;
 
-- (MyLayoutPos * (^)(id val))myEqualTo;
-- (MyLayoutPos * (^)(CGFloat val))myOffset;
-- (MyLayoutPos * (^)(CGFloat val))myMin;
-- (MyLayoutPos * (^)(id posVal, CGFloat offset))myLBound;
-- (MyLayoutPos * (^)(CGFloat val))myMax;
-- (MyLayoutPos * (^)(id posVal, CGFloat offset))myUBound;
-- (void)myClear;
-
 - (MyLayoutPos *)_myEqualTo:(id)val;
 - (MyLayoutPos *)_myOffset:(CGFloat)val;
 - (MyLayoutPos *)_myMin:(CGFloat)val;
