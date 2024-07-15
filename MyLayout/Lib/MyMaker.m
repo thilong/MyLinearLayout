@@ -219,81 +219,80 @@
     return [self addMethod:@"pagedCount"];
 }
 
-- (MyMaker * (^)(id val))equalTo {
+- (MyMaker *)equalTo:(id)val {
     _clear = YES;
-    return ^id(id val) {
-        for (NSString *key in self->_keys) {
-            for (UIView *myView in self->_myViews) {
-                if ([val isKindOfClass:[NSNumber class]]) {
-                    id oldVal = [myView valueForKey:key];
-                    if ([oldVal isKindOfClass:[MyLayoutPos class]]) {
-                        [((MyLayoutPos *)oldVal) myEqualTo:(val)];
-                    } else if ([oldVal isKindOfClass:[MyLayoutSize class]]) {
-                        [((MyLayoutSize *)oldVal) myEqualTo:(val)];
-                    } else {
-                        [myView setValue:val forKey:key];
-                    }
-                } else if ([val isKindOfClass:[MyLayoutPos class]]) {
-                    [((MyLayoutPos *)[myView valueForKey:key]) myEqualTo:(val)];
-                } else if ([val isKindOfClass:[MyLayoutSize class]]) {
-                    [((MyLayoutSize *)[myView valueForKey:key]) myEqualTo:(val)];
-                } else if ([val isKindOfClass:[NSArray class]]) {
-                    [((MyLayoutSize *)[myView valueForKey:key]) myEqualTo:(val)];
-                } else if ([val isKindOfClass:[UIView class]]) {
-                    id oldVal = [val valueForKey:key];
-                    if ([oldVal isKindOfClass:[MyLayoutPos class]]) {
-                        [((MyLayoutPos *)[myView valueForKey:key]) myEqualTo:(oldVal)];
-                    } else if ([oldVal isKindOfClass:[MyLayoutSize class]]) {
-                        [((MyLayoutSize *)[myView valueForKey:key]) myEqualTo:(oldVal)];
-                    } else {
-                        [myView setValue:oldVal forKey:key];
-                    }
+    for (NSString *key in self->_keys) {
+        for (UIView *myView in self->_myViews) {
+            if ([val isKindOfClass:[NSNumber class]]) {
+                id oldVal = [myView valueForKey:key];
+                if ([oldVal isKindOfClass:[MyLayoutPos class]]) {
+                    [((MyLayoutPos *)oldVal) myEqualTo:(val)];
+                } else if ([oldVal isKindOfClass:[MyLayoutSize class]]) {
+                    [((MyLayoutSize *)oldVal) myEqualTo:(val)];
+                } else {
+                    [myView setValue:val forKey:key];
+                }
+            } else if ([val isKindOfClass:[MyLayoutPos class]]) {
+                [((MyLayoutPos *)[myView valueForKey:key]) myEqualTo:(val)];
+            } else if ([val isKindOfClass:[MyLayoutSize class]]) {
+                [((MyLayoutSize *)[myView valueForKey:key]) myEqualTo:(val)];
+            } else if ([val isKindOfClass:[NSArray class]]) {
+                [((MyLayoutSize *)[myView valueForKey:key]) myEqualTo:(val)];
+            } else if ([val isKindOfClass:[UIView class]]) {
+                id oldVal = [val valueForKey:key];
+                if ([oldVal isKindOfClass:[MyLayoutPos class]]) {
+                    [((MyLayoutPos *)[myView valueForKey:key]) myEqualTo:(oldVal)];
+                } else if ([oldVal isKindOfClass:[MyLayoutSize class]]) {
+                    [((MyLayoutSize *)[myView valueForKey:key]) myEqualTo:(oldVal)];
+                } else {
+                    [myView setValue:oldVal forKey:key];
                 }
             }
         }
-        return self;
-    };
+    }
+    return self;
+
 }
 
-- (MyMaker * (^)(CGFloat val))offset {
+- (MyMaker *)offset:(CGFloat)val {
     _clear = YES;
-    return ^id(CGFloat val) {
+    
         for (NSString *key in self->_keys) {
             for (UIView *myView in self->_myViews) {
                 [((MyLayoutPos *)[myView valueForKey:key]) _myOffset:val];
             }
         }
         return self;
-    };
+    
 }
 
-- (MyMaker * (^)(CGFloat val))multiply {
+- (MyMaker *)multiply:(CGFloat)val {
     _clear = YES;
-    return ^id(CGFloat val) {
+    
         for (NSString *key in self->_keys) {
             for (UIView *myView in self->_myViews) {
                 [((MyLayoutSize *)[myView valueForKey:key]) _myMultiply:val];
             }
         }
         return self;
-    };
+    
 }
 
-- (MyMaker * (^)(CGFloat val))add {
+- (MyMaker *)add:(CGFloat)val {
     _clear = YES;
-    return ^id(CGFloat val) {
+    
         for (NSString *key in self->_keys) {
             for (UIView *myView in self->_myViews) {
                 [((MyLayoutSize *)[myView valueForKey:key]) _myAdd:val];
             }
         }
         return self;
-    };
+    
 }
 
-- (MyMaker * (^)(id val))min {
+- (MyMaker *)min:(id)val {
     _clear = YES;
-    return ^id(id val) {
+    
         for (NSString *key in self->_keys) {
             for (UIView *myView in self->_myViews) {
                 id val2 = val;
@@ -309,12 +308,12 @@
             }
         }
         return self;
-    };
+    
 }
 
-- (MyMaker * (^)(id val))max {
+- (MyMaker *)max:(id)val {
     _clear = YES;
-    return ^id(id val) {
+    
         for (NSString *key in self->_keys) {
             for (UIView *myView in self->_myViews) {
                 id val2 = val;
@@ -330,7 +329,7 @@
             }
         }
         return self;
-    };
+    
 }
 
 #pragma mark -- Dreprecated methods

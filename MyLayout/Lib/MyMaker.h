@@ -77,13 +77,13 @@
 - (MyMaker *)clearFloat;
 
 //赋值操支持NSNumber,UIView,MyLayoutPos,MyLayoutSize, NSArray[MyLayoutSize]
-- (MyMaker * (^)(id val))equalTo;
-- (MyMaker * (^)(id val))min;
-- (MyMaker * (^)(id val))max;
+- (MyMaker *)equalTo:(id)val;
+- (MyMaker *)min:(id)val;
+- (MyMaker *)max:(id)val;
 
-- (MyMaker * (^)(CGFloat val))offset;
-- (MyMaker * (^)(CGFloat val))multiply;
-- (MyMaker * (^)(CGFloat val))add;
+- (MyMaker *)offset:(CGFloat)val;
+- (MyMaker *)multiply:(CGFloat)val;
+- (MyMaker *)add:(CGFloat)val;
 
 @end
 

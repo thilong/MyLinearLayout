@@ -13,4 +13,7 @@ func test1(){
     let ll = MyLinearLayout()
     ll.myWidth = 12
     ll.leadingPos.myEqual(to: 12).myOffset(12)
+    ll.makeLayout { make in
+        make?.width().equal(to: 12)
+    }
 }
