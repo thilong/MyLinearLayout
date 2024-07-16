@@ -1,0 +1,43 @@
+#!/bin/bash
+export setCmd="set -eo pipefail"
+export scriptVer="1.0"
+
+function requireFile() # args: filePath [, touchFileIfNotFound]
+{
+	local filePath="$1"
+	local touchFileIfNotFound="$2"
+	
+	if [[ ! -f "$filePath" ]]; then
+		if [[ $touchFileIfNotFound == "true" ]]; then
+			touch "$filePath" || panic $? "Failed to touch $filePath"
+		else
+			panic 1 "File $filePath not found"
+		fi
+	fi
+}
+
+executeablePath="$TARGET_BUILD_DIR/$EXECUTABLE_PATH"
+includeFilesPath="$TARGET_BUILD_DIR/include/$PROJECT_NAME"
+
+
+frameworkName="$PROJECT_NAME.framework"
+frameworkPath="$USER_LIBRARY_DIR/Frameworks/$frameworkName"
+#检查是否存在编译的文件, 如果没有编译成功，则退出
+requireFile $executeablePath false
+
+#如果framework路径存在，则删除
+if [ -d "$frameworkPath" ]; then
+	rm -rf "$frameworkPath"
+fi
+
+mkdir "$frameworkPath"
+
+#拷贝可执行文件
+cp "$executeablePath" "$frameworkPath/$PROJECT_NAME"
+
+#拷贝头文件
+mkdir "$frameworkPath/Headers"
+cp -rf "$includeFilesPath"/* "$frameworkPath/Headers"
+
+
+

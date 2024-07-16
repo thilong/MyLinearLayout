@@ -445,6 +445,9 @@
 		6740E1FD20A52DB000AFBC5A /* AllTest10HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllTest10HeaderView.h; sourceTree = "<group>"; };
 		6740E1FF20A52DC100AFBC5A /* AllTest10Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllTest10Cell.m; sourceTree = "<group>"; };
 		6740E20020A52DC100AFBC5A /* AllTest10Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllTest10Cell.h; sourceTree = "<group>"; };
+		EA30C5632C46A9ED00C77626 /* CopyFrameworkFiles */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = CopyFrameworkFiles; sourceTree = SOURCE_ROOT; };
+		EA30C5642C46A9ED00C77626 /* BuildFramework */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildFramework; sourceTree = SOURCE_ROOT; };
+		EA30C5652C46A9ED00C77626 /* CreateFramework */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = CreateFramework; sourceTree = SOURCE_ROOT; };
 		EA8B43352C458D47001D44E8 /* MyLayoutDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyLayoutDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		EA8B43362C458D47001D44E8 /* SwiftTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -485,6 +488,7 @@
 		184082841B2C46E8003F378B = {
 			isa = PBXGroup;
 			children = (
+				EA30C5622C46A9DD00C77626 /* Scripts */,
 				18D3C8F91EDF04E000D3DE43 /* MyLayoutDemo */,
 				18D683E61C4F421400A48BB4 /* MyLayout */,
 				18D684531C4F423400A48BB4 /* MyLayoutTests */,
@@ -912,6 +916,16 @@
 			name = FlexLayoutDemo;
 			sourceTree = "<group>";
 		};
+		EA30C5622C46A9DD00C77626 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				EA30C5642C46A9ED00C77626 /* BuildFramework */,
+				EA30C5632C46A9ED00C77626 /* CopyFrameworkFiles */,
+				EA30C5652C46A9ED00C77626 /* CreateFramework */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -958,6 +972,7 @@
 				181A10B11EDF12CF00996203 /* Frameworks */,
 				181A10B21EDF12CF00996203 /* Headers */,
 				181A10B31EDF12CF00996203 /* Resources */,
+				EA30C5612C46A97800C77626 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1136,6 +1151,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EA30C5612C46A97800C77626 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#${PROJECT_DIR}/../BuildFramework\n\n#rm -rf \"${USER_LIBRARY_DIR}/Frameworks/$FULL_PRODUCT_NAME\"\n#cp -rf \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" \"${USER_LIBRARY_DIR}/Frameworks/\"\n#echo \"copy to ${USER_LIBRARY_DIR}/Frameworks/$FULL_PRODUCT_NAME done\" \n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		181A10B01EDF12CF00996203 /* Sources */ = {

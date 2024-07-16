@@ -1,0 +1,103 @@
+#!/bin/bash
+
+set -e
+#控制同时只能有一个脚本在运行中
+if [ -n "$SHELL_BUILD_MUTEX" ]; then
+    exit 0
+fi
+export SHELL_BUILD_MUTEX=1
+
+executeablePath="$TARGET_BUILD_DIR/$EXECUTABLE_PATH"  
+executeableWrapperPath="$TARGET_BUILD_DIR/$WRAPPER_NAME"
+
+
+frameworkName="$WRAPPER_NAME"
+frameworkPath="$USER_LIBRARY_DIR/Frameworks/$frameworkName"
+
+function requireFile() # args: filePath [, touchFileIfNotFound]
+{
+    local filePath="$1"
+
+    if [[ ! -f "$filePath" ]]; then
+        echo "File $filePath not found"
+        exit 1
+    fi
+}
+
+function BuildStaticLibrary {
+    echo "building ${TARGET_NAME} ${1}"
+    xcrun xcodebuild -project "${PROJECT_FILE_PATH}" \
+        -target "${TARGET_NAME}" \
+        -configuration "${CONFIGURATION}" \
+        -sdk "${1}" \
+        ONLY_ACTIVE_ARCH=NO \
+        BUILD_DIR="${BUILD_DIR}" \
+        OBJROOT="${OBJROOT}/DependentBuilds" \
+        BUILD_ROOT="${BUILD_ROOT}" \
+        SYMROOT="${SYMROOT}" $ACTION 
+        #在低于xcode10的应用中需要把OBJROOT设置为  OBJROOT="${OBJROOT}"
+}
+
+#使用lipo合并不同架构的.a文件
+function MakeFlatLibrary {
+    xcrun lipo -create "${1}" "${2}" -output "${3}" >> /dev/null
+}
+
+#移除特定的构架
+function RemoveArch {
+    lipo -remove "${2}" "${1}" -output "${1}.tmp"
+    mv "${1}.tmp" "${1}"
+}
+
+#检查是否存在编译的文件, 如果没有编译成功，则退出
+requireFile $executeablePath false
+
+echo "${SDK_NAME} has been built"
+
+if [[ "$SDK_NAME" =~ ([A-Za-z]+) ]]; then
+    additionSDKPlatform=${BASH_REMATCH[1]}
+else
+    echo "====Could not find platform name from SDK_NAME: $SDK_NAME"
+    exit 1
+fi
+
+# 2 - Extract the version from the SDK
+if [[ "$SDK_NAME" =~ ([0-9]+.*$) ]]; then
+    additionSDKVersion=${BASH_REMATCH[1]}
+else
+    echo "====Could not find sdk version from SDK_NAME: $SDK_NAME"
+    exit 1
+fi
+
+# 3 - Determine the other platform
+if [ "$additionSDKPlatform" == "iphoneos" ]; then
+    additionPlatform=iphonesimulator
+else
+    additionPlatform=iphoneos
+fi
+
+# 4 - Find the build directory
+if [[ "$BUILT_PRODUCTS_DIR" =~ (.*)$additionSDKPlatform$ ]]; then
+    additionProductDir="${BASH_REMATCH[1]}${additionPlatform}"
+else
+    echo "====Could not find other platform build directory."
+    exit 1
+fi
+
+additionProductPath="$additionProductDir/$EXECUTABLE_PATH"
+
+#编译其他平台的库
+BuildStaticLibrary "${additionPlatform}${additionSDKVersion}"
+#检查其他平台是否编译成功
+requireFile $additionProductPath false
+
+#移除iphonesimulator下的arm64架构,这个针对xcode12.5+, 支持m1的版本
+if [ "$additionSDKPlatform" == "iphoneos" ]; then
+    RemoveArch "$additionProductPath" "arm64"
+else
+    RemoveArch "$executeablePath" "arm64"
+fi
+
+
+MakeFlatLibrary "$executeablePath" "$additionProductPath" "$executeablePath"
+
